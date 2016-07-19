@@ -1,4 +1,4 @@
-" Christian's person vim settings
+" Christian's personal vim settings
 
 " General
 syntax on
