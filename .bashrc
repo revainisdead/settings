@@ -18,8 +18,6 @@ export PS1="\[\033[38;5;141m\]\h\[$(tput sgr0)\]\[\033[38;5;118m\]@\u\[$(tput sg
 alias private="ecryptfs-mount-private"
 alias uprivate="ecryptfs-umount-private"
 
-alias cf="cd ~/Private/clone/cyberfire"
-
 # Add python 3.4 to path permanently
 PATH=$PATH:/usr/bin/python3
 export PATH
