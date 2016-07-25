@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Christian Hall
+	email = hallbasics@yahoo.com
+
+# SSL
+	sslcalinfo = /etc/ssl/certs/ca-certificates.crt
+
+# Text editor
+[core]
+	editor = 'vim'
