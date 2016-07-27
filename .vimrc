@@ -4,6 +4,8 @@ filetype plugin on
 syntax on
 set showmatch "Highlight braces matching, very useful
 set number
+set mouse=a
+set cmdheight=2
 
 " Backspace
 set backspace=indent,eol,start
@@ -12,6 +14,7 @@ set backspace=indent,eol,start
 set tabstop=4
 set softtabstop=4 "Important: Also lets you backspace 4 characters
 set expandtab "Converts tabs to spaces
+set autoindent
 
 " Searching
 set incsearch "Search while typing
