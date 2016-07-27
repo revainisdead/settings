@@ -2,7 +2,9 @@
 Xcurson.theme : Vanilla-DMZ-AA
 
 ! urxvt color scheme:
+! Gray
 URxvt*background: #2B2B2B
+! Black
 URxvt*foreground: #DEDEDE
 
 URxvt*loginshell : true
@@ -41,13 +43,6 @@ URxvt*color15 : #EEEEEC
 URxvt*font : xft:terminus:pixelsize=12
 URxvt*boldFont : xft:terminus:bold:pixelsize=12
 
-! extension for links
-URxvt.perl-ext-common : default, matcher
-
-! enabling clickable links
-URxvt.urlLauncher : /usr/bin/chromium
-URxvt.matcher.button : 1
-
 ! Scrolling/Cursor Style
 URxvt*saveLines : 12000
 URxvt*scrollstyle : plain
@@ -55,11 +50,10 @@ URxvt*scrollBar : false
 URxvt*cursonUnderline : true
 
 ! xterm settings
-
 XTerm*background: black
 XTerm*faceName: Bitstream Vera Serif Mono
-XTerm*faceSize: 11
+XTerm*faceSize: 10
 XTerm*background: #2B2B2B
 XTerm*foreground: #DEDEDE
 XTerm*cursorColor: #8FAF9F
-
+XTerm*color4: #0078ff

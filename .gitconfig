@@ -7,6 +7,6 @@
 # SSL
 	sslcalinfo = /etc/ssl/certs/ca-certificates.crt
 
-# Text editor
 [core]
+# Text editor
 	editor = 'vim'
