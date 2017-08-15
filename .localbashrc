@@ -23,6 +23,9 @@ alias gd="git diff"
 alias gl="git log"
 alias gb="git branch"
 
+alias db="cd /mnt/dev/opt/cyberfire && auto -u postgres psql cyberfire"
+alias db2="psql -U postgres"
+
 # Django
 alias run="sudo python3 manage.py runserver --nothreading 0.0.0.0:8080"
 alias mm="python3 manage.py makemigrations"
