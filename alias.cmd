@@ -16,16 +16,17 @@ doskey gl=git log
 doskey apacheconf=cd /d C:\Apache24\conf
 
 doskey binh=cd /d C:\Users\Christian\Documents\binh
-doskey cards=cd /d C:\Users\Christian\Documents\binh\House-of-Cards
-doskey tcards=cd /d C:\Users\Christian\Documents\binh\xprt_E_checking\
-
-doskey plotter=cd /d Z:\CA-CIE-Tools-TestRepos\ca-plot-scripts-christian
+doskey aliasdir=cd /d C:\bin\
 
 doskey gtp=cd /d C:\Users\christian\Documents\binh\gtpaper-env\gtpaper
 
 REM install was being robbed by vim (install.exe), alternative to adding to path.
-REM Highly preferred, lower path size.
+REM so removed vim bin from path, using .exe directly
+REM Bonus: lower path size. Negative: can't use vim -o split screen
 doskey vim="C:\Program Files (x86)\Vim\vim80\vim.exe" "$*"
 
 REM Activate gtpaper virtual environment
 doskey gtpact=C:\Users\Christian\Documents\binh\gtpaper-env\gtpaper\scripts\win_act.bat
+
+REM dir /ah --> All hidden files
+REM dir /ad --> All directories

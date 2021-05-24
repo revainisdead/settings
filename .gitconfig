@@ -1,15 +1,24 @@
 # This is Git's per-user configuration file.
+[filter "lfs"]
+    required = true
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+
 [user]
-# Please adapt and uncomment the following lines:
+    # Please adapt and uncomment the following lines:
 	name = Christian Hall
 	email = hallbasics@yahoo.com
 
-# SSL
+    # SSL
 	sslcalinfo = /etc/ssl/certs/ca-certificates.crt
+
+    # Update
+    # win: git update-git-for-windows
+    # nix: git update
 
 [core]
     editor = 'vim'
-    autoclrf = false
+    autocrlf = false
 
 [credential]
 	helper = cache --timeout 7200
