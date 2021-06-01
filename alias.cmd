@@ -2,6 +2,7 @@
 
 REM ** Windows equivalent of .bashrc
 REM ** Run this command in windows: `cmd /K C:\destination\alias.cmd`
+REM ** To run as Administrator, use Ctrl+Shift+Enter
 
 REM List of all aliases, mirror alias command on linux.
 doskey alias=doskey /MACROS
