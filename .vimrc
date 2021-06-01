@@ -1,46 +1,87 @@
-" General
 filetype on
 filetype plugin on
 syntax on
-set showmatch "Highlight braces matching, very useful
-set number
+set showmatch "Highlight matching braces
+set number "Line numbers
 set mouse=a
 set cmdheight=2
-set novisualbell
 
-" Backspace
 set backspace=indent,eol,start
 
-" Tabs
 set tabstop=4
 set softtabstop=4 "Important: Also lets you backspace 4 characters
-set expandtab "Converts tabs to spaces
+set expandtab "Convert tabs to spaces
 set autoindent
-set shiftwidth=4 "When using < or > to indent
+set shiftwidth=4 "Amount of spaces for > (shift right) or < (shift left)
 
-" Searching
-set incsearch "Search while typing
 set ignorecase
-set smartcase "If a cap is used, match case
+set smartcase "If a capital is used, match case, only if ignore case is set first
+set incsearch "Search while typing
 
-" Helpful git configuration
 autocmd FileType gitcommit setl tw=72
 
-" Movement. The best part.
+" Purpose: If the line is wrapped, move down into the wrapped text
+" So one visual line: from line 1 to line 1 (wrapped)
+" Instead of: from line 1 to line 2 (no matter what)
 nnoremap j gj
 nnoremap k gk
 set iskeyword-=_ "Don't recognize underscore as a word, so w and b break on it
 
+" Windows undo file auto creation
+:set noundofile
 
 " For if Ctrl-W is bound to something else while in vim
 " Ctrl-j: move down a split pane
 " nnoremap <C-J> <C-W><C-J>
-" Ctrl-k: move up a split pane
-" nnoremap <C-K> <C-W><C-K>
+" Ctrl-j: move up a split pane
+" nnoremap: <C-K> <C-W><C-K>
 
+" Turn off vim error sounds in Windows (no visual bell)
+:set novb
 
 " call plug#begin('~/.vim/plugged')
 " Plugins
 " Plug 'rust-lang/rust.vim'
 " Plug 'sjl/badwolf'
 " call plug#end()
+
+" P is a synonym for p, overwrite it.
+" Purpose: paste from system clipboard
+nnoremap P "*p
+
+" Problem was: I want these for VISUAL mode, not NORMAL (command) mode
+" Use vnoremap for visual mode commands
+
+" Some people remap Y to y$ (which will then copy from cursor to end of line)
+" Y by default copies the whole line (I always shift-v and y to copy whole
+" line, so I don't need Y, remap to opposing functionality of P:
+" (Note -> If I need y$, I'll use that command or v$h aka. visual, end of
+" line, one to the left (takes away EOL char))
+" Purpose: copy to system clipboard
+vnoremap Y "*y
+
+" c: cut
+" but, technically, d does the same thing, by putting it in the register
+" (Note -> c also puts into insert mode, which d does not do)
+" d: delete (and can paste after)
+" So -> overwrite c which I dont use, to delete without being able to paste
+" Black hole register is "_
+" Use d in combination with black hole register to delete text (/dev/null)
+vnoremap C "_d
+
+
+" Instead of using the black hole register, instead remap p to use the
+" 'last used' register, which y (yank) will contribute to, but not d (delete)
+"nnoremap p "0p
+" The problem to this second approach is that I am used to d putting it into
+" the normally used register... I delete text and paste again to move stuff
+
+" Commands Reference
+" D: delete from cursor to end of line (not including EOL)
+" u: Undo
+" Ctrl-r: Redo
+" a: go into insert mode, one character to the right
+" A: go into insert mode, at end of the line
+" :set paste  -> turn paste on (better indentation formatting)
+" :set paste! -> turn paste off
+" :echo has('clipboard') -> 1 for enabled clipboard
