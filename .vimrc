@@ -85,3 +85,5 @@ vnoremap C "_d
 " :set paste  -> turn paste on (better indentation formatting)
 " :set paste! -> turn paste off
 " :echo has('clipboard') -> 1 for enabled clipboard
+
+" Use `dos2unix .vimrc` to get linux only line endings
