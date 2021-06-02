@@ -7,10 +7,10 @@
 [user]
     # Please adapt and uncomment the following lines:
 	name = Christian Hall
-	email = hallbasics@yahoo.com
+	email = chall@incytestudios.com
 
     # SSL
-	sslcalinfo = /etc/ssl/certs/ca-certificates.crt
+	#sslcalinfo = /etc/ssl/certs/ca-certificates.crt
 
     # Update
     # win: git update-git-for-windows
