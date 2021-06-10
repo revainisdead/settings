@@ -3,20 +3,18 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-PS1='[\u@\h \W]\$ '
+#PS1='[\u@\h \W]\$ '
 
 # Show git branch in terminal
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 # Branch name terminal
-export PS1="\[\033[1;30m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[1;30m\]]\[\033[1;30m\]$\[\033[00m\] "
+#export PS1="\[\033[1;30m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[1;30m\]]\[\033[1;30m\]$\[\033[00m\] "
+export PS1="\[\033[38;5;246m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[38;5;246m\]]\[\033[38;5;246m\]$\[\033[00m\] "
 
 # Aliases
 alias ls='ls --color=auto'
-
-# SSHFS
-alias sshdev="sudo sshfs -o allow_other root@10.10.243.116:/ /mnt/dev"
 
 # Git
 alias gs="git status"
@@ -26,33 +24,29 @@ alias gb="git branch"
 
 # Directories
 alias bin="cd /home/christian/bin"
+alias notes="cd /home/christian/bin/notes"
+alias ski="cd /home/christian/bin/summit-knowledge-integration"
+alias erp="cd /home/christian/bin/erp-service"
+alias log="cd /home/christian/bin/login-service"
 
-alias db="cd /mnt/dev/opt/cyberfire && auto -u postgres psql cyberfire"
-alias db2="psql -U postgres"
+alias snips="cd /home/christian/Pictures/snippets"
+alias cab="cd /home/christian/bin/summit-knowledge-integration/client/src/cable-ticket"
+alias mod="cd /home/christian/bin/summit-knowledge-integration/client/src/core/models"
+alias tick="cd /home/christian/bin/summit-knowledge-integration/server/tickets"
+#alias erp_t="cd /home/christian/bin/summit-knowledge-integration/server/sk/tasks"
 
-# Django
-alias run="sudo python3 manage.py runserver --nothreading 0.0.0.0:8080"
-alias mm="python3 manage.py makemigrations"
-alias m="python3 manage.py migrate"
-alias link="sudo python manage.py collectstatic --link"
+# Notable files
+f_array=()
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/CableTicket.factory.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/grunt-config-new.json")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableModalService.service.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/vendor/cancelableResource.factory.coffee")
 
-alias private="ecryptfs-mount-private"
-alias uprivate="ecryptfs-umount-private"
-alias sd="uprivate && sudo telinit 0"
-alias notes="cd ~/notes/dev"
-
-# For fun
-alias neo="cd ~/bin/matrix && python matrix.py"
-
-# slap dap -LDAP- lap
-alias ldapcdconf="cd /etc/openldap"
-alias ldapconf="sudo vim /etc/openldap/slapd.conf"
-alias ldapcddb="cd /var/lib/openldap/openldap-data"
-alias ldapconftest="sudo slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d/"
-
-# Add python 3.4 to path permanently
-alias py2="export PATH=/home/christian/.gem/ruby/2.3.0/bin:/home/christian/.gem/ruby/2.3.0/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/bin/python2"
-alias py3="export PATH=/home/christian/.gem/ruby/2.3.0/bin:/home/christian/.gem/ruby/2.3.0/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/bin/python3"
+alias gar="cd /home/christian/bin/garden-venv/garden/"
+alias gar-act="source ../bin/activate"
 
 # Alias functions
 quotesgrep() {
@@ -72,11 +66,51 @@ findname() {
     find . -type f -print | grep "$1"
 }
 
-export PYTHONPATH=/mnt/dev/opt/cfcore
-export MYPYPATH=/mnt/dev/opt/cfcore:/mnt/dev/opt/cfcore/stubs:/mnt/dev/opt/cyberfire:/mnt/dev/opt/cyberfire/stubs
-export PATH=$PATH:/usr/bin/python3
+finddir() {
+    echo Searching for folder name container $1 . . .
+    find . -type d -name $1
+}
 
-PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+getpath() {
+    #echo Printing the absolute path for \"$1\"...
+    find "$PWD" -name $1
+}
+
+printNotable() {
+    # Now defined above
+    #declare -a arr=($f1, $f2, $f3)
+
+    for item in "${f_array[@]}"
+    do
+        echo "$item"
+    done
+}
+
+#alias db="cd /mnt/dev/opt/cyberfire && auto -u postgres psql cyberfire"
+#alias db2="psql -U postgres"
+
+# Django
+#alias run="sudo python3 manage.py runserver --nothreading 0.0.0.0:8080"
+#alias mm="python3 manage.py makemigrations"
+#alias m="python3 manage.py migrate"
+#alias link="sudo python manage.py collectstatic --link"
+
+#alias private="ecryptfs-mount-private"
+#alias uprivate="ecryptfs-umount-private"
+#alias sd="uprivate && sudo telinit 0"
+
+#alias neo="cd ~/bin/matrix && python matrix.py"
+
+# slap dap -LDAP- lap
+#alias ldapcdconf="cd /etc/openldap"
+#alias ldapconf="sudo vim /etc/openldap/slapd.conf"
+#alias ldapcddb="cd /var/lib/openldap/openldap-data"
+#alias ldapconftest="sudo slaptest -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d/"
+
+# Add python 3.4 to path permanently (old computer)
+#alias py2="export PATH=/home/christian/.gem/ruby/2.3.0/bin:/home/christian/.gem/ruby/2.3.0/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/bin/python2"
+#alias py3="export PATH=/home/christian/.gem/ruby/2.3.0/bin:/home/christian/.gem/ruby/2.3.0/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/bin/python3"
+
 
 
 ### Ubuntu Defaults ###
@@ -128,23 +162,23 @@ esac
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
+#if [ -n "$force_color_prompt" ]; then
+#    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+#	# We have color support; assume it's compliant with Ecma-48
+#	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+#	# a case would tend to support setf rather than setaf.)
+#	color_prompt=yes
+#    else
+#	color_prompt=
+#    fi
+#fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
+#if [ "$color_prompt" = yes ]; then
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#else
+#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+#fi
+#unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in

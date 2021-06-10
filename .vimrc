@@ -1,6 +1,3 @@
-filetype on
-filetype plugin on
-syntax on
 set showmatch "Highlight matching braces
 set number "Line numbers
 set mouse=a
@@ -38,6 +35,10 @@ set iskeyword-=_ "Don't recognize underscore as a word, so w and b break on it
 
 " Turn off vim error sounds in Windows (no visual bell)
 :set novb
+
+set clipboard=unnamedplus
+
+call pathogen#infect()
 
 " call plug#begin('~/.vim/plugged')
 " Plugins
@@ -87,3 +88,6 @@ vnoremap C "_d
 " :echo has('clipboard') -> 1 for enabled clipboard
 
 " Use `dos2unix .vimrc` to get linux only line endings
+
+filetype plugin indent on
+syntax enable
