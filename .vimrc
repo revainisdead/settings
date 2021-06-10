@@ -36,8 +36,6 @@ set iskeyword-=_ "Don't recognize underscore as a word, so w and b break on it
 " Turn off vim error sounds in Windows (no visual bell)
 :set novb
 
-set clipboard=unnamedplus
-
 call pathogen#infect()
 
 " call plug#begin('~/.vim/plugged')
@@ -50,16 +48,19 @@ call pathogen#infect()
 " Purpose: paste from system clipboard
 nnoremap P "*p
 
-" Problem was: I want these for VISUAL mode, not NORMAL (command) mode
 " Use vnoremap for visual mode commands
-
 " Some people remap Y to y$ (which will then copy from cursor to end of line)
 " Y by default copies the whole line (I always shift-v and y to copy whole
 " line, so I don't need Y, remap to opposing functionality of P:
 " (Note -> If I need y$, I'll use that command or v$h aka. visual, end of
 " line, one to the left (takes away EOL char))
 " Purpose: copy to system clipboard
-vnoremap Y "*y
+"
+" for Windows
+"vnoremap Y "*y
+" for Linux
+vnoremap Y "+y
+
 
 " c: cut
 " but, technically, d does the same thing, by putting it in the register
@@ -75,9 +76,16 @@ vnoremap C "_d
 " 'last used' register, which y (yank) will contribute to, but not d (delete)
 "nnoremap p "0p
 " The problem to this second approach is that I am used to d putting it into
-" the normally used register... I delete text and paste again to move stuff
+" the used register... I delete text and paste again to move stuff
 
 " Commands Reference
+" ---
+" New:
+" diw: Delete current word (better than wdb, no space at end)
+" di": Delete within quotes ("delete in" quotes)
+" di(: Delete within parenthesis ("delete in" parens)
+" :.! ls -> Insert output from command directly into vim
+" ---
 " D: delete from cursor to end of line (not including EOL)
 " u: Undo
 " Ctrl-r: Redo
@@ -85,9 +93,29 @@ vnoremap C "_d
 " A: go into insert mode, at end of the line
 " :set paste  -> turn paste on (better indentation formatting)
 " :set paste! -> turn paste off
+" :%s/word_to_remove/word_to_add/g -> Search and replace
+
+" Notes
+" ---
+" Check if Vim supports copy/paste from clipboard in the following ways:
 " :echo has('clipboard') -> 1 for enabled clipboard
+" `vim --version | grep .xterm_clipboard -o` ->
+"   +xterm_clipboard MEANS CLIPBOARD IS ENABLED
+"   -xterm_clipboard MEANS CLIPBOARD IS DISABLED
+" To install vim that has a build with clipboard enabled:
+" run `sudo apt-get purge vim`
+" run `sudo apt-get autoremove vim`
+" (old Ubuntu) run `apt-get install vim-gnome`
+" (new Ubuntu) run `apt-get install vim-gtk3` (Working)
+" Recheck `vim --version | grep clipboard`
 
 " Use `dos2unix .vimrc` to get linux only line endings
+
+" run `sudo apt-get install universal-ctags`
+" run `ctags -R .`
+" Make vim search tags recursively up the path
+set tags=./tags;,tags;
+
 
 filetype plugin indent on
 syntax enable
