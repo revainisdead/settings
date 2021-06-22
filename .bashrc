@@ -13,8 +13,21 @@ parse_git_branch() {
 #export PS1="\[\033[1;30m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[1;30m\]]\[\033[1;30m\]$\[\033[00m\] "
 export PS1="\[\033[38;5;246m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[38;5;246m\]]\[\033[38;5;246m\]$\[\033[00m\] "
 
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
 # Aliases
-alias ls='ls --color=auto'
+alias ls="ls --color=auto --group-directories-first"
+alias flame="flameshot gui"
 
 # Git
 alias gs="git status"
@@ -28,6 +41,8 @@ alias notes="cd /home/christian/bin/notes"
 alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
 alias log="cd /home/christian/bin/login-service"
+alias tests="cd /home/christian/bin/summit-knowledge-integration/client/spec"
+alias stash="cd /home/christian/bin/stash"
 
 alias snips="cd /home/christian/Pictures/snippets"
 alias cab="cd /home/christian/bin/summit-knowledge-integration/client/src/cable-ticket"
@@ -39,11 +54,14 @@ alias tick="cd /home/christian/bin/summit-knowledge-integration/server/tickets"
 f_array=()
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/CableTicket.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/serializers.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/grunt-config-new.json")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableModalService.service.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/vendor/cancelableResource.factory.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/app-chaplin/routes.js")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/templates/index_sk.html")
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"
 alias gar-act="source ../bin/activate"
@@ -63,6 +81,8 @@ exgrep() {
 
 findname() {
     echo Searching for file name containg $1 . . .
+    # Grep preferrable to -name because it prints matches in color
+    # To exlude folders from find use `find . -type d \( -path ./.git -o -path ./node_modules -o \) -prune - false -o -name '*.txt'`
     find . -type f -print | grep "$1"
 }
 
@@ -72,8 +92,14 @@ finddir() {
 }
 
 getpath() {
-    #echo Printing the absolute path for \"$1\"...
+    # Or could use . for directory, equivalent
     find "$PWD" -name $1
+}
+getpathrc() {
+    echo Printing the absolute path for \"$1\"... \(and adding to .bashrc\)
+    find "$PWD" -name $1
+    find "$PWD" -name $1 >> ~/.bashrc
+
 }
 
 printNotable() {
@@ -85,6 +111,9 @@ printNotable() {
         echo "$item"
     done
 }
+
+alias dp="docker ps"
+alias di="docker images"
 
 #alias db="cd /mnt/dev/opt/cyberfire && auto -u postgres psql cyberfire"
 #alias db2="psql -U postgres"
@@ -189,18 +218,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -232,3 +249,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+#/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/actions-section.html
+#/home/christian/bin/summit-knowledge-integration/client/src/core/save-button

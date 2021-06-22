@@ -71,6 +71,8 @@ vnoremap Y "+y
 " Use d in combination with black hole register to delete text (/dev/null)
 vnoremap C "_d
 
+" Normal mode: Run python on current file using F5
+nmap <F5> :!clear; python3 %<CR>
 
 " Instead of using the black hole register, instead remap p to use the
 " 'last used' register, which y (yank) will contribute to, but not d (delete)
@@ -80,6 +82,9 @@ vnoremap C "_d
 
 " Commands Reference
 " ---
+" Supertab:
+" Ctrl-p: Go up one item in list (instead of arrow keys)
+" Ctrl-n: Go down one item in list (instead of array keys)
 " New:
 " diw: Delete current word (better than wdb, no space at end)
 " di": Delete within quotes ("delete in" quotes)
