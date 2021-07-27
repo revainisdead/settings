@@ -13,6 +13,9 @@ parse_git_branch() {
 #export PS1="\[\033[1;30m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[1;30m\]]\[\033[1;30m\]$\[\033[00m\] "
 export PS1="\[\033[38;5;246m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[38;5;246m\]]\[\033[38;5;246m\]$\[\033[00m\] "
 
+# Disable Ctrl-s (pause terminal): Inadvertently enable search with Ctrl-s (Ctrl-r: reverse search)
+stty -ixon
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -27,11 +30,13 @@ fi
 
 # Aliases
 alias ls="ls --color=auto --group-directories-first"
+alias lsswp="ls .*.swp"
 alias flame="flameshot gui"
 
 # Git
 alias gs="git status"
 alias gd="git diff"
+alias gdc="git diff --cached"
 alias gl="git log"
 alias gb="git branch"
 
@@ -41,27 +46,42 @@ alias notes="cd /home/christian/bin/notes"
 alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
 alias log="cd /home/christian/bin/login-service"
-alias tests="cd /home/christian/bin/summit-knowledge-integration/client/spec"
+alias tests="cd /home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket"
 alias stash="cd /home/christian/bin/stash"
 
 alias snips="cd /home/christian/Pictures/snippets"
 alias cab="cd /home/christian/bin/summit-knowledge-integration/client/src/cable-ticket"
 alias mod="cd /home/christian/bin/summit-knowledge-integration/client/src/core/models"
+alias core="cd /home/christian/bin/summit-knowledge-integration/client/src/core"
 alias tick="cd /home/christian/bin/summit-knowledge-integration/server/tickets"
-#alias erp_t="cd /home/christian/bin/summit-knowledge-integration/server/sk/tasks"
+alias sk="cd /home/christian/bin/summit-knowledge-integration/server/sk"
+#/home/christian/bin/summit-knowledge-integration/server/sk/tasks
+#/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/actions-section.html
+#/home/christian/bin/summit-knowledge-integration/client/src/core/save-button
+
+alias gtp="cd /home/christian/bin/gtpaper-venv/gtpaper"
+alias gtpact="source /home/christian/bin/gtpaper-venv/bin/activate"
 
 # Notable files
 f_array=()
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/CableTicket.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/serializers.py")
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py") # CableTicket, CableSegment
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/abstract.py") # CableSegmentAbstractModel
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/templates/index_sk.html")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/sk/api_v3_urls.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/sk/views.py") # ERPServiceProxyViewSet
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/rest_serializers.py") # NestedListSerializer
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/erp.py") # ERPClient
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/grunt-config-new.json")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableModalService.service.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/vendor/cancelableResource.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/app-chaplin/routes.js")
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/templates/index_sk.html")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselectSearches.service.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/filters/findChoice.filter.coffee")
+#F_ARRAY_END
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"
 alias gar-act="source ../bin/activate"
@@ -110,6 +130,11 @@ printNotable() {
     do
         echo "$item"
     done
+}
+
+updateSettings() {
+    cp .bashrc ~/bin/settings/
+    cp .vimrc ~/bin/settings/
 }
 
 alias dp="docker ps"
@@ -249,5 +274,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-#/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/actions-section.html
-#/home/christian/bin/summit-knowledge-integration/client/src/core/save-button

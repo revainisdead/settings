@@ -99,6 +99,11 @@ nmap <F5> :!clear; python3 %<CR>
 " :set paste  -> turn paste on (better indentation formatting)
 " :set paste! -> turn paste off
 " :%s/word_to_remove/word_to_add/g -> Search and replace
+" % -> While on bracket, brings to matching bracket
+" Copy from vim to vim: select text, y (yank), shift-insert
+" Copy from vim to clipboard: select text, shift-y, Ctrl-v
+" Paste from clipboard to vim: select text, shift-p
+" dd -> Delete current line (surprised how helpful this is)
 
 " Notes
 " ---
