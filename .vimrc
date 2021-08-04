@@ -119,11 +119,19 @@ nmap <F5> :!clear; python3 %<CR>
 " Copy from vim to clipboard: select text, shift-y, Ctrl-v
 " Paste from clipboard to vim: select text, shift-p
 " dd -> Delete current line (surprised how helpful this is)
+"
 " Macros
 "   q <name>:           start macro and give it a name
 "   q:                  same key again to stop recording macro
 "   <keys to replay>:   keys you want to to replay in the macro
 "   @<name>:            Play the macro, by name
+"
+" Multi line comments in Python or Coffeescript
+"   Ctrl-V:     Enter Visual Block where you'd like comments to start
+"   j:          Go down until you reach where comments should end
+"   Shift-i:    Begin insert mode for the comment characters
+"   #:          Use # (or //, etc) to add comment to every line denoted by visual block
+"   Escape:     When finished. Type `Escape Escape` to power through delay bug
 
 " Notes
 " ---
