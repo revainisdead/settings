@@ -1,31 +1,34 @@
-set showmatch "Highlight matching braces
-set number "Line numbers
-set mouse=a
-set cmdheight=2
+set showmatch   "Highlight matching braces
+set number      "Line numbers
+set mouse=a     "Allow mouse interaction
+set cmdheight=2 "Command window: 2 lines high
+"set noruler     "Remove blinking cursor
 
 set backspace=indent,eol,start
 
-set tabstop=4
-set softtabstop=4 "Important: Also lets you backspace 4 characters
-set expandtab "Convert tabs to spaces
-set autoindent
-set shiftwidth=4 "Amount of spaces for > (shift right) or < (shift left)
+set tabstop=4       "Tab indents 4 spaces
+set softtabstop=4   "Important: Also lets you backspace 4 characters
+set expandtab       "Convert tabs to spaces
+set autoindent      "Auto indent when entering new line, etc.
+set shiftwidth=4    "Amount of spaces for > (shift right) or < (shift left)
 
-set ignorecase
-set smartcase "If a capital is used, match case, only if ignore case is set first
-set incsearch "Search while typing
+"set ignorecase  "Pay no attention to case at all
+set smartcase   "If a capital is used, match case, only if ignore case is set first
+set incsearch   "Search while typing
 
-autocmd FileType gitcommit setl tw=72
+autocmd FileType gitcommit setl tw=72   "Git rebase enacting vim
 
 " Purpose: If the line is wrapped, move down into the wrapped text
 " So one visual line: from line 1 to line 1 (wrapped)
 " Instead of: from line 1 to line 2 (no matter what)
 nnoremap j gj
 nnoremap k gk
-set iskeyword-=_ "Don't recognize underscore as a word, so w and b break on it
+set iskeyword-=_    "Don't recognize underscore as a word, so w and b break on it
 
 " Windows undo file auto creation
 :set noundofile
+":set history=50     "Keep 50 lines of command line history
+
 
 " For if Ctrl-W is bound to something else while in vim
 " Ctrl-j: move down a split pane
@@ -44,10 +47,11 @@ call pathogen#infect()
 " Plug 'sjl/badwolf'
 " call plug#end()
 
-" P is a synonym for p, overwrite it.
+" Description: P is a synonym for p, overwrite it.
 " Purpose: paste from system clipboard
 nnoremap P "*p
 
+" Description:
 " Use vnoremap for visual mode commands
 " Some people remap Y to y$ (which will then copy from cursor to end of line)
 " Y by default copies the whole line (I always shift-v and y to copy whole
@@ -56,12 +60,17 @@ nnoremap P "*p
 " line, one to the left (takes away EOL char))
 " Purpose: copy to system clipboard
 "
-" for Windows
-"vnoremap Y "*y
-" for Linux
-vnoremap Y "+y
+" May be able to autodetect OS, will need testing.
+" See: https://stackoverflow.com/questions/2842078/how-do-i-detect-os-x-in-my-vimrc-file-so-certain-configurations-will-only-appl
+if has("unix")
+    " for Linux
+    vnoremap Y "+y
+else
+    " for Windows
+    vnoremap Y "*y
+endif
 
-
+" Description:
 " c: cut
 " but, technically, d does the same thing, by putting it in the register
 " (Note -> c also puts into insert mode, which d does not do)
@@ -69,13 +78,18 @@ vnoremap Y "+y
 " So -> overwrite c which I dont use, to delete without being able to paste
 " Black hole register is "_
 " Use d in combination with black hole register to delete text (/dev/null)
+"
+" Purpose: Option to delete text without adding to clipboard of any kind
 vnoremap C "_d
 
 " Normal mode: Run python on current file using F5
 nmap <F5> :!clear; python3 %<CR>
 
+" Description:
 " Instead of using the black hole register, instead remap p to use the
 " 'last used' register, which y (yank) will contribute to, but not d (delete)
+"
+" Purpose: Tried this but didn't work well for me
 "nnoremap p "0p
 " The problem to this second approach is that I am used to d putting it into
 " the used register... I delete text and paste again to move stuff
@@ -87,6 +101,7 @@ nmap <F5> :!clear; python3 %<CR>
 " Ctrl-n: Go down one item in list (instead of array keys)
 " New:
 " diw: Delete current word (better than wdb, no space at end)
+" ciw: Delete current word + Enter insert mode
 " di": Delete within quotes ("delete in" quotes)
 " di(: Delete within parenthesis ("delete in" parens)
 " :.! ls -> Insert output from command directly into vim
@@ -104,6 +119,11 @@ nmap <F5> :!clear; python3 %<CR>
 " Copy from vim to clipboard: select text, shift-y, Ctrl-v
 " Paste from clipboard to vim: select text, shift-p
 " dd -> Delete current line (surprised how helpful this is)
+" Macros
+"   q <name>:           start macro and give it a name
+"   q:                  same key again to stop recording macro
+"   <keys to replay>:   keys you want to to replay in the macro
+"   @<name>:            Play the macro, by name
 
 " Notes
 " ---

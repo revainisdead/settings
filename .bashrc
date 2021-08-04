@@ -40,6 +40,9 @@ alias gdc="git diff --cached"
 alias gl="git log"
 alias gb="git branch"
 
+alias push="git push origin"
+alias fpush="git push --force-with-lease origin"
+
 # Directories
 alias bin="cd /home/christian/bin"
 alias notes="cd /home/christian/bin/notes"
@@ -64,7 +67,6 @@ alias gtpact="source /home/christian/bin/gtpaper-venv/bin/activate"
 
 # Notable files
 f_array=()
-f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/CableTicket.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/serializers.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py") # CableTicket, CableSegment
@@ -79,6 +81,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/vendor/cancelableResource.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/app-chaplin/routes.js")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselect.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselectSearches.service.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/filters/findChoice.filter.coffee")
 #F_ARRAY_END
