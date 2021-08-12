@@ -17,7 +17,7 @@ set smartcase   "If a capital is used, match case, only if ignore case is set fi
 
 set incsearch   "Search while typing
 
-autocmd FileType gitcommit setl tw=72   "Set max commit line length when rebasing
+autocmd FileType gitcommit setl tw=72   "Set max commit line length when rebasing, amend commit, or commit without message
 
 " Purpose: If the line is wrapped, move down into the wrapped text
 " So one visual line: from line 1 to line 1 (wrapped)
@@ -164,7 +164,7 @@ nmap <F5> :!clear; python3 %<CR>
 set tags=./tags;,tags;
 
 " Set max line length for certain types of files using autocmd
-autocmd BufRead,BufNewFile *.js setlocal textwidth=
+" autocmd BufRead,BufNewFile *.js *.coffee setlocal textwidth=90
 
 filetype plugin indent on
 syntax enable

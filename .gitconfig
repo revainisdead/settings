@@ -1,18 +1,32 @@
 # This is Git's per-user configuration file.
 #
+# `git config --global` -> ~/.gitconfig
+# `git config --system` -> $(prefix)/etc/gitconfig
+#
 # Update Git CLI
 # ---
 # win: git update-git-for-windows
 # nix: git update
-#
+
+[alias]
+    # Cannot override git commands, must create new alias.
+    pushf = push --force-with-lease
+    pullrb = pull --rebase
+
+    # Use exclamation at beginning of line if command includes git
+    lsf = !git ls-files | grep --color -i
+
+    undo = reset HEAD^
+
 # Colors
 # -----------------------------------------------------------------------------------------------------
 [color]
-    #branch = auto
-    #diff = auto
-    #status = auto
-    #    showbranch = auto
-    #ui = true
+    branch = auto
+    interactive = auto
+    diff = auto
+    status = auto
+        showbranch = auto
+    ui = true
 
 # color.branch
 #     A boolean to enable/disable color in the output of git-branch(1). May be set to always, false (or
@@ -66,9 +80,9 @@
 #     The first color given is the foreground; the second is the background.
 #     The position of the attribute, if any, doesn't matter.
 [color "branch"]
-    #current = green reverse # default value
-    #local = green # default value
-    #remote = yellow # default value
+    #current = green # default value
+    #local = white # default value
+    #remote = red # default value
     current = green reverse
     local = green
     remote = yellow
@@ -80,16 +94,18 @@
 #     or whitespace (highlighting whitespace errors). The values of these variables may be specified as
 #     in color.branch.<slot>.
 [color "diff"]
-    meta = yellow bold
-    #frag = magenta bold
-    #old = red bold
-    #new = green bold
-    #
-    # Test "slot" by changing from all the same color to one using a different color to see what it changes.
-    #meta = green bold
-    #frag = green bold
-    #old = yellow
-    #new = green bold
+    # Note: White turns to a gray color, use normal to achieve white.
+
+    #meta = normal bold # default
+    #frag = cyan # default
+    #old = red # default
+    #new = green # default
+    plain = white # code around the code changes
+    meta = normal
+    frag = magenta
+    func = magenta
+    old = red bold
+    new = green bold
 
 # color.decorate.<slot>
 #     Use customized color for git log --decorate output.  <slot> is one of branch, remoteBranch, tag,
@@ -107,9 +123,17 @@
 #     (the current branch), or nobranch (the color the no branch warning is shown in, defaulting to
 #     red). The values of these variables may be specified as in color.branch.<slot>.
 [color "status"]
-    #added = yellow
-    #changed = green
-    #untracked = cyan
+    #header = normal # default
+    #added = green # default
+    #changed = red # default
+    #untracked = red # default
+    #nobranch = red # default
+    header = normal
+    added = green bold
+    changed = red bold
+    untracked = red
+    branch = yellow bold
+    nobranch = yellow bold
 # -----------------------------------------------------------------------------------------------------
 
 [filter "lfs"]
@@ -125,8 +149,6 @@
     # SSL
 	#sslcalinfo = /etc/ssl/certs/ca-certificates.crt
 
-# git config --global: ~/.gitconfig
-# git config --sytem: $(prefix)/etc/gitconfig
 [core]
     editor = 'vim'
     autocrlf = false
@@ -135,5 +157,8 @@
 [credential]
     helper = cache --timeout 7200
 
-#[advice]
+[diff]
+    #tool = vimdiff
+
+[advice]
     #detachedHead = false
