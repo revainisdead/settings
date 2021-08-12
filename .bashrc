@@ -29,6 +29,11 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Aliases
+alias ..="cd ../../"
+alias ...="cd ../../../"
+alias ....="cd ../../../../"
+alias .....="cd ../../../../../"
+
 alias ls="ls --color=auto --group-directories-first"
 alias lsswp="ls .*.swp"
 alias flame="flameshot gui"
@@ -120,8 +125,14 @@ getpath() {
 }
 getpathrc() {
     echo Printing the absolute path for \"$1\"... \(and adding to .bashrc\)
-    find "$PWD" -name $1
-    find "$PWD" -name $1 >> ~/.bashrc
+    # overwrite: >
+    # append: >>
+    # stderr: &>
+    # stderr append: &>>
+    # stderr overwrite w/ terminal putput: 2>&1 | tee
+
+    #find "$PWD" -name $1 >> ~/.bashrc
+    find "$PWD" -name $1 2>&1 | tee ~/.bashrc
 
 }
 
@@ -136,8 +147,9 @@ printNotable() {
 }
 
 updateSettings() {
-    cp .bashrc ~/bin/settings/
-    cp .vimrc ~/bin/settings/
+    cp ~/.bashrc ~/bin/settings/
+    cp ~/.vimrc ~/bin/settings/
+    cp ~/.gitconfig ~/bin/settings/
 }
 
 alias dp="docker ps"

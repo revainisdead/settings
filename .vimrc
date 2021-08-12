@@ -12,11 +12,12 @@ set expandtab       "Convert tabs to spaces
 set autoindent      "Auto indent when entering new line, etc.
 set shiftwidth=4    "Amount of spaces for > (shift right) or < (shift left)
 
-"set ignorecase  "Pay no attention to case at all
+set ignorecase  "Works together with smartcase, see next line.
 set smartcase   "If a capital is used, match case, only if ignore case is set first
+
 set incsearch   "Search while typing
 
-autocmd FileType gitcommit setl tw=72   "Git rebase enacting vim
+autocmd FileType gitcommit setl tw=72   "Set max commit line length when rebasing
 
 " Purpose: If the line is wrapped, move down into the wrapped text
 " So one visual line: from line 1 to line 1 (wrapped)
@@ -25,10 +26,14 @@ nnoremap j gj
 nnoremap k gk
 set iskeyword-=_    "Don't recognize underscore as a word, so w and b break on it
 
-" Windows undo file auto creation
-:set noundofile
-":set history=50     "Keep 50 lines of command line history
-
+if has("unix")
+    " Linux
+    set undofile
+    set history=50     "Keep 50 lines of command line history
+else
+    " Windows
+    set noundofile
+endif
 
 " For if Ctrl-W is bound to something else while in vim
 " Ctrl-j: move down a split pane
@@ -97,14 +102,15 @@ nmap <F5> :!clear; python3 %<CR>
 " Commands Reference
 " ---
 " Supertab:
-" Ctrl-p: Go up one item in list (instead of arrow keys)
-" Ctrl-n: Go down one item in list (instead of array keys)
+" Ctrl-p -> Go up one item in list (instead of arrow keys)
+" Ctrl-n -> Go down one item in list (instead of array keys)
 " New:
-" diw: Delete current word (better than wdb, no space at end)
-" ciw: Delete current word + Enter insert mode
-" di": Delete within quotes ("delete in" quotes)
-" di(: Delete within parenthesis ("delete in" parens)
+" diw -> Delete current word (better than wdb, no space at end)
+" ciw -> Delete current word + Enter insert mode
+" di" -> Delete within quotes ("delete in" quotes)
+" di( -> Delete within parenthesis ("delete in" parens)
 " :.! ls -> Insert output from command directly into vim
+" gv -> Select last used visual selection
 " ---
 " D: delete from cursor to end of line (not including EOL)
 " u: Undo
@@ -119,6 +125,8 @@ nmap <F5> :!clear; python3 %<CR>
 " Copy from vim to clipboard: select text, shift-y, Ctrl-v
 " Paste from clipboard to vim: select text, shift-p
 " dd -> Delete current line (surprised how helpful this is)
+" * Ctrl-O: Backwards to last spot looking at (best description...)
+" * Ctrl-I: Fowards: opposite of to last spot
 "
 " Macros
 "   q <name>:           start macro and give it a name
@@ -132,6 +140,7 @@ nmap <F5> :!clear; python3 %<CR>
 "   Shift-i:    Begin insert mode for the comment characters
 "   #:          Use # (or //, etc) to add comment to every line denoted by visual block
 "   Escape:     When finished. Type `Escape Escape` to power through delay bug
+
 
 " Notes
 " ---
@@ -154,6 +163,8 @@ nmap <F5> :!clear; python3 %<CR>
 " Make vim search tags recursively up the path
 set tags=./tags;,tags;
 
+" Set max line length for certain types of files using autocmd
+autocmd BufRead,BufNewFile *.js setlocal textwidth=
 
 filetype plugin indent on
 syntax enable
