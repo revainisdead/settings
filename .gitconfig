@@ -8,15 +8,16 @@
 # win: git update-git-for-windows
 # nix: git update
 
+# Cannot override git commands, must create new alias.
+# Use exclamation at beginning of line if command includes git
 [alias]
-    # Cannot override git commands, must create new alias.
     pushf = push --force-with-lease
     pullrb = pull --rebase
 
-    # Use exclamation at beginning of line if command includes git
     lsf = !git ls-files | grep --color -i
-
     undo = reset HEAD^
+    all = !git add -u && git add .
+    cm = commit -m
 
 # Colors
 # -----------------------------------------------------------------------------------------------------

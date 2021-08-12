@@ -140,6 +140,9 @@ nmap <F5> :!clear; python3 %<CR>
 "   Shift-i:    Begin insert mode for the comment characters
 "   #:          Use # (or //, etc) to add comment to every line denoted by visual block
 "   Escape:     When finished. Type `Escape Escape` to power through delay bug
+"
+" When opening a file that is read only because of permissions, can still save
+" :w !sudo tee %
 
 
 " Notes

@@ -131,8 +131,8 @@ getpathrc() {
     # stderr append: &>>
     # stderr overwrite w/ terminal putput: 2>&1 | tee
 
-    #find "$PWD" -name $1 >> ~/.bashrc
-    find "$PWD" -name $1 2>&1 | tee ~/.bashrc
+    find "$PWD" -name $1
+    find "$PWD" -name $1 >> ~/.bashrc
 
 }
 
