@@ -133,7 +133,7 @@
     added = green bold
     changed = red bold
     untracked = red
-    branch = yellow bold
+    branch = normal bold
     nobranch = yellow bold
 # -----------------------------------------------------------------------------------------------------
 
