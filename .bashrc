@@ -150,6 +150,7 @@ updateSettings() {
     cp ~/.bashrc ~/bin/settings/
     cp ~/.vimrc ~/bin/settings/
     cp ~/.gitconfig ~/bin/settings/
+    cp ~/.ssh/config ~/bin/settings/ssh_config
 }
 
 alias dp="docker ps"
