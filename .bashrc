@@ -37,6 +37,8 @@ alias .....="cd ../../../../../"
 alias ls="ls --color=auto --group-directories-first"
 alias lsswp="ls .*.swp"
 alias flame="flameshot gui"
+alias installed="sudo apt list --installed"
+alias search="sudo apt-cache search"
 
 # Git
 alias gs="git status"
@@ -69,6 +71,12 @@ alias sk="cd /home/christian/bin/summit-knowledge-integration/server/sk"
 
 alias gtp="cd /home/christian/bin/gtpaper-venv/gtpaper"
 alias gtpact="source /home/christian/bin/gtpaper-venv/bin/activate"
+
+# Cleanup
+removeVimUndo() {
+    files=$(find . -type f -print | grep ".un~" | sed "/node_modules/d")
+    rm $files
+}
 
 # Notable files
 f_array=()
@@ -108,10 +116,20 @@ exgrep() {
 }
 
 findname() {
-    echo Searching for file name containg $1 . . .
+    #echo Searching for file name containg $1 . . .
+
     # Grep preferrable to -name because it prints matches in color
-    # To exlude folders from find use `find . -type d \( -path ./.git -o -path ./node_modules -o \) -prune - false -o -name '*.txt'`
-    find . -type f -print | grep "$1"
+    # To exlude folders from find use:
+    # `find . -type d \( -path ./.git -o -path ./node_modules -o \) -prune - false -o -name '*.txt'`
+
+    # Add quote at beginning and end of each line to be able to expand and send to rm command
+    # s/^/'/ Replace beginning of line with a tick
+    # s/$/'/ Replace end of line with a tick
+    #find . -type f -print | grep "$1" | sed "s/^/'/;s/$/'/"
+    # Summary: turns out not needed, can use `rm $(findname .test1)` without quoting output and it works.
+
+    # Use sed to exclude directories from output
+    find . -type f -print | grep "$1" | sed "/node_modules/d" # Delete entire line containing string
 }
 
 finddir() {

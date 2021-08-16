@@ -30,6 +30,10 @@ if has("unix")
     " Linux
     set undofile
     set history=50     "Keep 50 lines of command line history
+
+    " See salt states for automatic undo directory creation
+    " https://github.com/revainisdead/saltstates/blob/master/vim/init.sls
+    set undodir=~/.vim/undo
 else
     " Windows
     set noundofile
@@ -63,10 +67,8 @@ nnoremap P "*p
 " line, so I don't need Y, remap to opposing functionality of P:
 " (Note -> If I need y$, I'll use that command or v$h aka. visual, end of
 " line, one to the left (takes away EOL char))
-" Purpose: copy to system clipboard
 "
-" May be able to autodetect OS, will need testing.
-" See: https://stackoverflow.com/questions/2842078/how-do-i-detect-os-x-in-my-vimrc-file-so-certain-configurations-will-only-appl
+" Purpose: copy to system clipboard
 if has("unix")
     " for Linux
     vnoremap Y "+y
