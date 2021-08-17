@@ -7,7 +7,6 @@ Host github.com
     IdentitiesOnly yes
 
 # Personal GitHub account:
-#Host github.com:revainisdead
 Host github-revainisdead
     Hostname github.com
     IdentityFile ~/.ssh/revainisdead_id_rsa

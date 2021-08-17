@@ -1,3 +1,9 @@
+if has("unix")
+    " for Linux
+else
+    " for Windows
+endif
+
 set showmatch   "Highlight matching braces
 set number      "Line numbers
 set mouse=a     "Allow mouse interaction
@@ -26,18 +32,11 @@ nnoremap j gj
 nnoremap k gk
 set iskeyword-=_    "Don't recognize underscore as a word, so w and b break on it
 
-if has("unix")
-    " Linux
-    set undofile
-    set history=50     "Keep 50 lines of command line history
-
-    " See salt states for automatic undo directory creation
-    " https://github.com/revainisdead/saltstates/blob/master/vim/init.sls
-    set undodir=~/.vim/undo
-else
-    " Windows
-    set noundofile
-endif
+" See salt states for automatic undo directory creation
+" https://github.com/revainisdead/saltstates/blob/master/vim/init.sls
+set undofile
+set history=50     "Keep 50 lines of command line history
+set undodir=~/.vim/undo
 
 " For if Ctrl-W is bound to something else while in vim
 " Ctrl-j: move down a split pane
@@ -56,26 +55,38 @@ call pathogen#infect()
 " Plug 'sjl/badwolf'
 " call plug#end()
 
+" set clipboard=unnamed " Use system clipboard as default register
 " Description: P is a synonym for p, overwrite it.
 " Purpose: paste from system clipboard
-nnoremap P "*p
+nnoremap P "+p
+if has("unix")
+    " For Linux only, create a special keybind for pasting from copy-on-select
+    nnoremap <C-P> "*p
+endif
+
+    " Note: Shorthand for " (get text from register) when in command mode like searching, for example, is Ctrl-R
 
 " Description:
-" Use vnoremap for visual mode commands
-" Some people remap Y to y$ (which will then copy from cursor to end of line)
-" Y by default copies the whole line (I always shift-v and y to copy whole
-" line, so I don't need Y, remap to opposing functionality of P:
-" (Note -> If I need y$, I'll use that command or v$h aka. visual, end of
-" line, one to the left (takes away EOL char))
+"     Linux uses two clipboards, * and + (* copy-on-select, + ctrl-c)
+"     Windows uses just one clipboard, so * and + are the same
+"
+"     So on linux, I need to
+"      - use * for 'vim' clipboard
+"      - use + for 'system' clipboard
+"
+"     Therefore on Windows, I just
+"      - use + for consistency, since either works
+"
+"     Bonus:
+"      - use " for the last used (added to) register
+"
+" NOTE: Use vnoremap for visual mode commands
+"
+" Interesting side effect of this command is that when set, the * register is
+" cleared.
 "
 " Purpose: copy to system clipboard
-if has("unix")
-    " for Linux
-    vnoremap Y "+y
-else
-    " for Windows
-    vnoremap Y "*y
-endif
+vnoremap Y "+y
 
 " Description:
 " c: cut
