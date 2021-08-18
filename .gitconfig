@@ -11,7 +11,7 @@
 # Cannot override git commands, must create new alias.
 # Use exclamation at beginning of line if command includes git
 [alias]
-    pushf = push --force-with-lease
+    fpush = push origin --force-with-lease
     pullrb = pull --rebase
 
     lsf = !git ls-files | grep --color -i
