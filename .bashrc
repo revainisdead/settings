@@ -47,9 +47,6 @@ alias gdc="git diff --cached"
 alias gl="git log"
 alias gb="git branch"
 
-alias push="git push origin"
-alias fpush="git push --force-with-lease origin"
-
 # Directories
 alias bin="cd /home/christian/bin"
 alias notes="cd /home/christian/bin/notes"
