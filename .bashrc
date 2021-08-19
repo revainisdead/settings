@@ -40,6 +40,9 @@ alias flame="flameshot gui"
 alias installed="sudo apt list --installed"
 alias search="sudo apt-cache search"
 
+alias dp="docker ps"
+alias di="docker images"
+
 # Git
 alias gs="git status"
 alias gd="git diff"
@@ -68,12 +71,6 @@ alias sk="cd /home/christian/bin/summit-knowledge-integration/server/sk"
 
 alias gtp="cd /home/christian/bin/gtpaper-venv/gtpaper"
 alias gtpact="source /home/christian/bin/gtpaper-venv/bin/activate"
-
-# Cleanup
-removeVimUndo() {
-    files=$(find . -type f -print | grep ".un~" | sed "/node_modules/d")
-    rm $files
-}
 
 # Notable files
 f_array=()
@@ -168,8 +165,12 @@ updateSettings() {
     cp ~/.ssh/config ~/bin/settings/ssh_config
 }
 
-alias dp="docker ps"
-alias di="docker images"
+# Cleanup
+removeVimUndo() {
+    # Use sed to remove lines containing 'node_modules'
+    files=$(find . -type f -print | grep ".un~" | sed "/node_modules/d")
+    rm $files
+}
 
 #alias db="cd /mnt/dev/opt/cyberfire && auto -u postgres psql cyberfire"
 #alias db2="psql -U postgres"

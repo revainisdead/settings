@@ -4,6 +4,11 @@ else
     " for Windows
 endif
 
+" Statusline
+set laststatus=2            " Show statusline always (default: only show when two files are open in the buffer)
+set statusline=%f           " Show file name
+set statusline+=\ [%{&fo}]  " Show formatting options
+
 set showmatch   "Highlight matching braces
 set number      "Line numbers
 set mouse=a     "Allow mouse interaction
@@ -47,7 +52,7 @@ set undodir=~/.vim/undo
 " Turn off vim error sounds in Windows (no visual bell)
 :set novb
 
-call pathogen#infect()
+execute pathogen#infect()
 
 " call plug#begin('~/.vim/plugged')
 " Plugins
@@ -114,9 +119,6 @@ nmap <F5> :!clear; python3 %<CR>
 
 " Commands Reference
 " ---
-" Supertab:
-" Ctrl-p -> Go up one item in list (instead of arrow keys)
-" Ctrl-n -> Go down one item in list (instead of array keys)
 " New:
 " diw -> Delete current word (better than wdb, no space at end)
 " ciw -> Delete current word + Enter insert mode
@@ -124,6 +126,10 @@ nmap <F5> :!clear; python3 %<CR>
 " di( -> Delete within parenthesis ("delete in" parens)
 " :.! ls -> Insert output from command directly into vim
 " gv -> Select last used visual selection
+" s -> substitute: delete current character (and go to insert mode)
+" Supertab:
+" Ctrl-p -> Go up one item in list (instead of arrow keys)
+" Ctrl-n -> Go down one item in list (instead of array keys)
 " ---
 " D: delete from cursor to end of line (not including EOL)
 " u: Undo
@@ -180,7 +186,9 @@ nmap <F5> :!clear; python3 %<CR>
 set tags=./tags;,tags;
 
 " Set max line length for certain types of files using autocmd
-" autocmd BufRead,BufNewFile *.js *.coffee setlocal textwidth=90
+" autocmd BufRead,BufNewFile *.js setlocal textwidth=90
+" autocmd BufRead,BufNewFile *.coffee set tw=90
+autocmd BufRead,BufNewFile *.json set ft=javascript
 
 filetype plugin indent on
 syntax enable

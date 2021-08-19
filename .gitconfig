@@ -16,8 +16,8 @@
 # Use exclamation at beginning of line if command includes git
 [alias]
     ; Push/Pull
-    upush = push origin -u
-    fpush = push origin -u --force-with-lease
+    upush = push origin -u                      # --set-upstream
+    fpush = push origin -u --force-with-lease   # --set-upstream
     pullrb = pull --rebase
 
     ; Changes
@@ -28,10 +28,10 @@
     ; List
     rso = remote show origin
     lsf = !git ls-files | grep --color -i
-    vv = branch -vv # see upstream branches
+    vv = branch -vv # see upstream branches in third column
 
     ; Branch
-    create = branch -b --track
+    create = checkout --track -b                # --set-upstream
 
 # Colors
 # -----------------------------------------------------------------------------------------------------
@@ -148,6 +148,7 @@
     #added = green # default
     #changed = red # default
     #untracked = red # default
+    #branch = normal # default
     #nobranch = red # default
     header = normal
     added = green bold
@@ -175,9 +176,10 @@
     editor = 'vim'
     excludesFile = ~/.gitignore # global ignore file
     commentChar = '#'
-    #bigFileThreshold = 512m # default
     longpaths = true
     symlinks = true # false means: fill in symlinks files with linked text
+
+    #bigFileThreshold = 512m # default
     #sharedRepository = christian # share repo files among group
 
     autocrlf = false # true means: CRLF in working directory, and LF in repository.
@@ -193,7 +195,8 @@
     #gpgSign = true
 
 [branch]
-    autoSetupMerge = always # replaces need for --set-upstream on push or --track on branch creation
+    #autoSetupMerge = always    # will set upstream to source branch
+    #autoSetupRebase = always   # git pull will always now do a rebase
 
 [push]
     default = simple
@@ -201,7 +204,7 @@
 [submodule]
 
 [credential]
-    helper = cache --timeout 7200
+    helper = cache --timeout 7200 # Only need to put in password every 2 hours
 
 [diff]
     #tool = vimdiff
