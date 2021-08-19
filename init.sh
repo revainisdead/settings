@@ -32,20 +32,28 @@ shopt -s dotglob
 for path in $SCRIPT_PATH/*
 do
     name=`basename $path`
-    newName=`$name`
+    newName=$name
+    destination=~/      # with trailing slash
 
     # Special case for moving ssh_config to a different target name: config
-    if [ $path = "ssh_config" ]; then
+    if [ $name = "ssh_config" ]; then
         newName="config"
+        destination=~/.ssh/     # with trailing slash
+
+        # Enable interpretation of backslash escapes using `echo -e`
+        echo -e "\tConverting ssh_config to ${newName} in ${destination}"
     fi
+
+    finalpath="${destination}${newName}"
 
     # Exclude does not contain name
     if [[ ! $exclude =~ $name ]]; then
-        echo $pathbase
-
         # Only copy over if file does not already exist
-        if [ ! -f ~/"$name" ]; then
-            sudo cp -r $pathbase ~/"$newName"
+        if [ ! -f $finalpath ]; then
+            echo "Copying file ${name} to ${finalpath}"
+            cp -r $name "$finalpath"
+        else
+            echo "File already exists $finalpath"
         fi
     fi
 done
