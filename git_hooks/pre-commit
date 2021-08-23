@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Run unit tests automatically with a pre-commit hook.
+# ---
+# This file will be run by git on commit (name as pre-commit, no extension),
+# and will finish the commit once the tests run successfully.
+#
+# (See https://blog.devgenius.io/automate-unit-tests-before-each-commit-by-git-hook-f331f0499786)
+
+# Parse `docker images` output for id of image with name "summit-knowledge-integration_static_build"
+SEARCH_TERM="summit-knowledge-integration_static_build"
+
+# Split line up into multiple lines using awk, delimeter being 3 spaces, print fourth line, finally remove all whitespace
+IMAGE_ID=$(docker images | grep $SEARCH_TERM | awk -F "\ \ \ " '{print $4}' | sed 's/^[[:space:]]*//g')
+
+echo -e "Running javascript tests before commit . . .\n"
+docker run -i $IMAGE_ID lerna run test --stream
+
+if [ $? -ne 0 ]; then
+    echo "Tests must pass before commit. Please fix errors and commit again."
+
+    exit 1 # Fail commit on non-zero exit code
+fi
