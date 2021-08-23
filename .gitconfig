@@ -24,8 +24,10 @@
     undo = reset HEAD^
     all = !git add -u && git add .
     cm = commit -m
+    nopre = commit --no-verify
 
     ; List
+    rv = remote -v
     rso = remote show origin
     lsf = !git ls-files | grep --color -i
     vv = branch -vv # see upstream branches in third column
@@ -175,7 +177,7 @@
 [core]
     editor = 'vim'
     excludesFile = ~/.gitignore # global ignore file
-    commentChar = '#'
+    #commentChar = '#'
     longpaths = true
     symlinks = true # false means: fill in symlinks files with linked text
 
@@ -194,20 +196,23 @@
 [commit]
     #gpgSign = true
 
+[push]
+    #default = simple
+
 [branch]
     #autoSetupMerge = always    # will set upstream to source branch
     #autoSetupRebase = always   # git pull will always now do a rebase
 
-[push]
-    default = simple
-
 [submodule]
 
-[credential]
-    helper = cache --timeout 7200 # Only need to put in password every 2 hours
+[hooks]
+    #allownonascii = true # default: false, don't allow non-ASCII filenames
 
 [diff]
     #tool = vimdiff
+
+[credential]
+    helper = cache --timeout 7200 # Only need to put in password every 2 hours
 
 [advice]
     #fetchShowForcedUpdates = false

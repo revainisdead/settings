@@ -34,6 +34,12 @@ alias ...="cd ../../../"
 alias ....="cd ../../../../"
 alias .....="cd ../../../../../"
 
+# Warning: no longer able to pass arguments to cd using this method
+#alias cd=pushd > /dev/null # overwrite cd to use pushd instead, so that I can go back multiple directories
+#alias bb="popd && popd"
+#alias bbb="popd && popd && popd"
+#alias bbbb="popd && popd && popd && popd"
+
 alias ls="ls --color=auto --group-directories-first"
 alias lsswp="ls .*.swp"
 alias flame="flameshot gui"

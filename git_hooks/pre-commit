@@ -17,7 +17,7 @@ echo -e "Running javascript tests before commit . . .\n"
 docker run -i $IMAGE_ID lerna run test --stream
 
 if [ $? -ne 0 ]; then
-    echo "Tests must pass before commit. Please fix errors and commit again."
+    echo "Tests must pass before commit. Please fix and commit again."
 
     exit 1 # Fail commit on non-zero exit code
 fi

@@ -189,6 +189,8 @@ set tags=./tags;,tags;
 " autocmd BufRead,BufNewFile *.js setlocal textwidth=90
 " autocmd BufRead,BufNewFile *.coffee set tw=90
 autocmd BufRead,BufNewFile *.json set ft=javascript
+autocmd BufRead,BufNewFile *.sh colorscheme pablo
+"autocmd BufRead,BufNewFile *.yaml tabstop=4
 
 filetype plugin indent on
 syntax enable
