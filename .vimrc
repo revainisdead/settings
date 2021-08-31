@@ -160,6 +160,12 @@ nmap <F5> :!clear; python3 %<CR>
 "   #:          Use # (or //, etc) to add comment to every line denoted by visual block
 "   Escape:     When finished. Type `Escape Escape` to power through delay bug
 "
+" Marks
+"   ma:  Create mark a
+"   mb:  Create mark b
+"   `a:  Go to mark a
+"   `b:  Go to mark b
+"
 " When opening a file that is read only because of permissions, can still save
 " :w !sudo tee %
 
@@ -191,6 +197,7 @@ set tags=./tags;,tags;
 autocmd BufRead,BufNewFile *.json set ft=javascript
 autocmd BufRead,BufNewFile *.sh colorscheme pablo
 "autocmd BufRead,BufNewFile *.yaml tabstop=4
+autocmd BufRead,BufNewFile *.py setlocal indentkeys-=: " remove colon from indent keys
 
 filetype plugin indent on
 syntax enable

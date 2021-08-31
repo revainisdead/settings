@@ -16,15 +16,15 @@
 # Use exclamation at beginning of line if command includes git
 [alias]
     ; Push/Pull
-    upush = push origin -u                      # --set-upstream
-    fpush = push origin -u --force-with-lease   # --set-upstream
+    upush = push origin -u
+    fpush = push origin -u --force-with-lease
     pullrb = pull --rebase
 
     ; Changes
     undo = reset HEAD^
     all = !git add -u && git add .
     cm = commit -m
-    nopre = commit --no-verify
+    cno = commit --no-verify -m
 
     ; List
     rv = remote -v
@@ -33,7 +33,10 @@
     vv = branch -vv # see upstream branches in third column
 
     ; Branch
-    create = checkout --track -b                # --set-upstream
+    create = checkout --track -b
+
+    ; Cleanup
+    rpo = remote prune origin
 
 # Colors
 # -----------------------------------------------------------------------------------------------------

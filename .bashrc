@@ -3,14 +3,37 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Includes
+source /home/christian/bin/settings/utils.sh
+
 #PS1='[\u@\h \W]\$ '
+
+#export PS1="\[\033[1;30m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[1;30m\]]\[\033[1;30m\]$\[\033[00m\] "
 
 # Show git branch in terminal
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-# Branch name terminal
-#export PS1="\[\033[1;30m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[1;30m\]]\[\033[1;30m\]$\[\033[00m\] "
+
+create_PS1() {
+    # Add documentation to ps1 terminal line, ie:
+    #    [christian@system76-pc (master) ~/bin/summit-knowledge-integration]$
+    MAKE_BOLD_YELLOW="\[\033[1;33m\]"
+    MAKE_BOLD_BLACK="\[\033[1;30m\]"
+    MAKE_REG_GREEN="\[\033[0;32m\]"
+    MAKE_RGB1="\[\033[38;5;246m\]"
+    MAKE_RGB2="\[\033[38;5;246m\]"
+    MAKE_NORMAL="\[\033[00m\]"
+    LITERAL_DOLLAR="$"
+    user="\u"           # see `man bash` -> PROMPTING
+    hostname="\h"       # see `man bash` -> PROMPTING
+    working_dir="\w"    # see `man bash` -> PROMPTING
+    branch="$(parse_git_branch)"
+
+    echo "$MAKE_RGB1[$user@$hostname $MAKE_BOLD_YELLOW$branch $MAKE_BOLD_BLACK$MAKE_REG_GREEN$working_dir$MAKE_RGB2]$MAKE_RGB2$LITERAL_DOLLAR$MAKE_NORMAL "
+}
+#export PS1=$(create_PS1)
+
 export PS1="\[\033[38;5;246m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[38;5;246m\]]\[\033[38;5;246m\]$\[\033[00m\] "
 
 # Disable Ctrl-s (pause terminal): Inadvertently enable search with Ctrl-s (Ctrl-r: reverse search)
@@ -48,6 +71,21 @@ alias search="sudo apt-cache search"
 
 alias dp="docker ps"
 alias di="docker images"
+alias dv="docker volume ls"
+
+dockerIdFromName() {
+    # Parse `docker images` output for id of image with name "summit-knowledge-integration_static_build"
+    #SEARCH_TERM="summit-knowledge-integration_static_build"
+    SEARCH_TERM=$1
+
+    # Split line up into multiple lines using awk, delimeter being 3 spaces, print fourth line, finally remove all whitespace
+    IMAGE_ID=$(docker images | grep $SEARCH_TERM | awk -F "\ \ \ " '{print $4}' | sed 's/^[[:space:]]*//g')
+
+    # Run command on docker image (would need to update image from running container for this to work on current code)
+    #docker run -i $IMAGE_ID lerna run test --stream
+
+    echo Retrieved $IMAGE_ID \(using $SEARCH_TERM\)
+}
 
 # Git
 alias gs="git status"
@@ -62,7 +100,9 @@ alias notes="cd /home/christian/bin/notes"
 alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
 alias log="cd /home/christian/bin/login-service"
-alias tests="cd /home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket"
+alias spec="cd /home/christian/bin/summit-knowledge-integration/client/spec"
+#alias spec="cd /home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket"
+#alias spec="cd /home/christian/bin/summit-knowledge-integration/client/spec/core/models"
 alias stash="cd /home/christian/bin/stash"
 
 alias snips="cd /home/christian/Pictures/snippets"
@@ -77,6 +117,12 @@ alias sk="cd /home/christian/bin/summit-knowledge-integration/server/sk"
 
 alias gtp="cd /home/christian/bin/gtpaper-venv/gtpaper"
 alias gtpact="source /home/christian/bin/gtpaper-venv/bin/activate"
+
+alias opg="cd /home/christian/bin/opg-venv/one-percent-growth"
+alias opgact="source /home/christian/bin/opg-venv/bin/activate"
+alias opgs="cd /home/christian/bin/opg-venv/one-percent-growth/server"
+alias opgc="cd /home/christian/bin/opg-venv/one-percent-growth/client"
+
 
 # Notable files
 f_array=()

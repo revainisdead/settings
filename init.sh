@@ -1,5 +1,7 @@
+#!/bin/bash
+
 # Move all relevant dot files from this folder to home ~/
-exclude_always=".git .gitignore init.sh alias.cmd README.md" # alias.cmd is for Windows
+exclude_always=".git .gitignore init.sh utils.sh alias.cmd README.md" # alias.cmd is for Windows
 exclude_for_now=".asoundrc .Xdefaults"
 
 exclude="${exclude_always} ${exclude_for_now}"
@@ -8,6 +10,9 @@ set -e
 pushd $(dirname $0) > /dev/null
 SCRIPT_PATH=$(pwd -P)
 popd > /dev/null
+# cd $SCRIPT_PATH/..
+
+source $SCRIPT_PATH/utils.sh
 
 # Point of this script is to move hidden files from this repo to the
 # home directory, so must be able to move dot files with mv/cp command
@@ -35,10 +40,10 @@ do
     if [[ ! $exclude =~ $name ]]; then
         # Only copy over if file does not already exist
         if [ ! -f $finalpath ]; then
-            echo "Copying file ${name} to ${finalpath}"
+            cecho "Copying file ${name} to ${finalpath}" green
             cp -r $name "$finalpath"
         else
-            echo "File already exists $finalpath"
+            cecho "File already exists $finalpath"
         fi
     fi
 done
