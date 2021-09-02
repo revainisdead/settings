@@ -72,6 +72,7 @@ alias search="sudo apt-cache search"
 alias dp="docker ps"
 alias di="docker images"
 alias dv="docker volume ls"
+alias dl="docker-compose logs -f --tail 20"
 
 dockerIdFromName() {
     # Parse `docker images` output for id of image with name "summit-knowledge-integration_static_build"
@@ -158,7 +159,7 @@ quotesgrep() {
 
 exgrep() {
     echo Checking for $1 excluding node_modules and react-with-addons . . .
-    grep -r --exclude-dir={node_modules,react-with-addons} $1 .
+    grep -r --exclude-dir={node_modules,react-with-addons,site-packages,notes,vendor,app-chaplin,.grunt,app-components,.git,static,media} $1 .
 }
 
 findname() {

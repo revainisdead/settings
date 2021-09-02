@@ -17,7 +17,7 @@
 [alias]
     ; Push/Pull
     upush = push origin -u
-    fpush = push origin -u --force-with-lease
+    fpush = push origin --force-with-lease
     pullrb = pull --rebase
 
     ; Changes
@@ -37,6 +37,7 @@
 
     ; Cleanup
     rpo = remote prune origin
+    odelete = push origin --delete
 
 # Colors
 # -----------------------------------------------------------------------------------------------------

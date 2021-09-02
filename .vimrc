@@ -152,6 +152,8 @@ nmap <F5> :!clear; python3 %<CR>
 "   q:                  same key again to stop recording macro
 "   <keys to replay>:   keys you want to to replay in the macro
 "   @<name>:            Play the macro, by name
+"   @@:                 Replay last macro used
+"   4@@:                Replay last macro used 4 times
 "
 " Multi line comments in Python or Coffeescript
 "   Ctrl-V:     Enter Visual Block where you'd like comments to start
