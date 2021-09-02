@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Color reset
-No_Color='\033[0m'
+Normal='\033[0m'
 
 # Regular Colors
 Black='\033[0;30m'        # Black
@@ -77,15 +77,73 @@ On_IWhite='\033[0;107m'   # White
 # Test creating object mapping
 declare -A colors
 
+# The key is the value passed to cecho after msg
+# ex. `cecho "This is a sentence" green`
+# The value is the color value from above globals
 colors=(
-    ["black"]='\033[0;30m'
-    ["red"]='\033[0;31m'
-    ["green"]='\033[0;32m'
-    ["yellow"]='\033[0;33m'
-    ["blue"]='\033[0;34m'
-    ["purple"]='\033[0;35m'
-    ["cyan"]='\033[0;36m'
-    ["white"]='\033[0;37m'
+    ["normal"]=$Normal
+    ["black"]=$Black
+    ["red"]=$Red
+    ["green"]=$Green
+    ["yellow"]=$Yellow
+    ["blue"]=$Blue
+    ["purple"]=$Purple
+    ["cyan"]=$Cyan
+    ["white"]=$White
+
+    ["bblack"]=$BBlack
+    ["bred"]=$BRed
+    ["bgreen"]=$BGreen
+    ["byellow"]=$BYellow
+    ["bblue"]=$BBlue
+    ["bpurple"]=$BPurple
+    ["bcyan"]=$BCyan
+    ["bwhite"]=$BWhite
+
+    ["ublack"]=$UBlack
+    ["ured"]=$URed
+    ["ugreen"]=$UGreen
+    ["uyellow"]=$UYellow
+    ["ublue"]=$UBlue
+    ["upurple"]=$UPurple
+    ["ucyan"]=$UCyan
+    ["uwhite"]=$UWhite
+
+    ["onblack"]=$OnBlack
+    ["onred"]=$OnRed
+    ["ongreen"]=$OnGreen
+    ["onyellow"]=$OnYellow
+    ["onblue"]=$OnBlue
+    ["onpurple"]=$OnPurple
+    ["oncyan"]=$OnCyan
+    ["onwhite"]=$OnWhite
+
+    ["iblack"]=$IBlack
+    ["ired"]=$IRed
+    ["igreen"]=$IGreen
+    ["iyellow"]=$IYellow
+    ["iblue"]=$IBlue
+    ["ipurple"]=$IPurple
+    ["icyan"]=$ICyan
+    ["iwhite"]=$IWhite
+
+    ["biblack"]=$BIBlack
+    ["bired"]=$BIRed
+    ["bigreen"]=$BIGreen
+    ["biyellow"]=$BIYellow
+    ["biblue"]=$BIBlue
+    ["bipurple"]=$BIPurple
+    ["bicyan"]=$BICyan
+    ["biwhite"]=$BIWhite
+
+    ["oniblack"]=$OnIBlack
+    ["onired"]=$OnIRed
+    ["onigreen"]=$OnIGreen
+    ["oniyellow"]=$OnIYellow
+    ["oniblue"]=$OnIBlue
+    ["onipurple"]=$OnIPurple
+    ["onicyan"]=$OnICyan
+    ["oniwhite"]=$OnIWhite
 )
 
 # set: animals['key']='value'
@@ -98,19 +156,11 @@ cecho() {
     text=$1
     colorArg=$2
 
-    # Retrieve from associate array
-    #colorFromMapping="${colors[$colorArg]}"
-    #echo -e "${colorFromMapping}${text}"
+    if [[ -z ${colorArg} ]]; then
+        colorArg="normal"
+    fi
 
-    case $colorArg in
-        RED|red|r)
-            echo -e "${Red}${text}"
-            ;;
-        GREEN|green|g)
-            echo -e "${Green}${text}"
-            ;;
-        *)
-            echo -e "${No_Color}${text}"
-            ;;
-    esac            
+    # Retrieve from associate array
+    colorFromMapping="${colors[$colorArg]}"
+    echo -e "${colorFromMapping}${text}"
 }

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Move all relevant dot files from this folder to home ~/
-exclude_always=".git .gitignore init.sh utils.sh alias.cmd README.md" # alias.cmd is for Windows
+exclude_always=".git .gitignore git_hooks init.sh utils.sh alias.cmd README.md" # alias.cmd is for Windows
 exclude_for_now=".asoundrc .Xdefaults"
 
 exclude="${exclude_always} ${exclude_for_now}"
@@ -27,11 +27,11 @@ do
 
     # Special case for moving ssh_config to a different target name: config
     if [ $name == "ssh_config" ]; then
-        newName="config"
         destination=~/.ssh/     # with trailing slash
+        newName="config"
 
         # Enable interpretation of backslash escapes using `echo -e`
-        echo -e "\tConverting ssh_config to ${newName} in ${destination}"
+        cecho "\tConverting ssh_config to ${newName} in ${destination}" yellow
     fi
 
     finalpath="${destination}${newName}"
@@ -43,7 +43,7 @@ do
             cecho "Copying file ${name} to ${finalpath}" green
             cp -r $name "$finalpath"
         else
-            cecho "File already exists $finalpath"
+            cecho "File already exists $finalpath" red
         fi
     fi
 done
