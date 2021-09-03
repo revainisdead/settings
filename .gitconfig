@@ -25,6 +25,7 @@
     all = !git add -u && git add .
     cm = commit -m
     cno = commit --no-verify -m
+    peek = show -p  # peek contents of last commit
 
     ; List
     rv = remote -v
@@ -38,6 +39,10 @@
     ; Cleanup
     rpo = remote prune origin
     odelete = push origin --delete
+
+    ; Stash
+    stashun = stash --include-untracked
+    speek = stash show -p   # peek contents of latest stash
 
 # Colors
 # -----------------------------------------------------------------------------------------------------

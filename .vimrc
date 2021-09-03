@@ -168,6 +168,14 @@ nmap <F5> :!clear; python3 %<CR>
 "   `a:  Go to mark a
 "   `b:  Go to mark b
 "
+" Vim Commentary
+"   gcc: Comment out current line (toggles)
+"   gcj: Comment out current line and line below (toggles)
+"   gc3j: Comment out 3 lines (toggles)
+"   gcG: Comment out from cursor to end of file (toggles)
+"   gcap: Comment out paragraph (toggles)
+"   gcgc: Uncomments adjacent commented lines (*)
+"
 " When opening a file that is read only because of permissions, can still save
 " :w !sudo tee %
 
@@ -196,8 +204,17 @@ set tags=./tags;,tags;
 " Set max line length for certain types of files using autocmd
 " autocmd BufRead,BufNewFile *.js setlocal textwidth=90
 " autocmd BufRead,BufNewFile *.coffee set tw=90
-autocmd BufRead,BufNewFile *.json set ft=javascript
+autocmd BufRead,BufNewFile *.json setlocal ft=javascript
 autocmd BufRead,BufNewFile *.sh colorscheme pablo
+autocmd BufRead,BufNewFile *.js,*.coffee colorscheme desert
+
+" For vim-commentary
+"autocmd FileType coffee setlocal commentstring=#\ %s
+"autocmd FileType js setlocal commentstring=//\ %s
+"autocmd FileType vimrc setlocal commentstring=\"\ %s
+"autocmd FileType gitconfig setlocal commentstring=#\ %s
+"
+
 "autocmd BufRead,BufNewFile *.yaml tabstop=4
 autocmd BufRead,BufNewFile *.py setlocal indentkeys-=: " remove colon from indent keys
 
