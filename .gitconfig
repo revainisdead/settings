@@ -24,8 +24,10 @@
     undo = reset HEAD^
     all = !git add -u && git add .
     cm = commit -m
-    cno = commit --no-verify -m
+    nopre = commit --no-verify -m
     peek = show -p  # peek contents of last commit
+    dd = diff develop
+    dm = diff master
 
     ; List
     rv = remote -v
@@ -43,6 +45,10 @@
     ; Stash
     stashun = stash --include-untracked
     speek = stash show -p   # peek contents of latest stash
+    schunk = checkout -p stash@{0}
+
+    ; Change History
+    altrebase = !git fetch && git rebase -i origin/develop
 
 # Colors
 # -----------------------------------------------------------------------------------------------------

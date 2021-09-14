@@ -28,7 +28,7 @@ create_PS1() {
     user="\u"           # see `man bash` -> PROMPTING
     hostname="\h"       # see `man bash` -> PROMPTING
     working_dir="\w"    # see `man bash` -> PROMPTING
-    branch="$(parse_git_branch)"
+    branch=$(parse_git_branch)
 
     echo "$MAKE_RGB1[$user@$hostname $MAKE_BOLD_YELLOW$branch $MAKE_BOLD_BLACK$MAKE_REG_GREEN$working_dir$MAKE_RGB2]$MAKE_RGB2$LITERAL_DOLLAR$MAKE_NORMAL "
 }
@@ -94,6 +94,11 @@ alias gd="git diff"
 alias gdc="git diff --cached"
 alias gl="git log"
 alias gb="git branch"
+
+# Add command completion for git aliases (defined in .gitconfig)
+_git_upush() {
+    _git_branch
+}
 
 # Directories
 alias bin="cd /home/christian/bin"

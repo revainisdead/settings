@@ -103,6 +103,7 @@ vnoremap Y "+y
 " Use d in combination with black hole register to delete text (/dev/null)
 "
 " Purpose: Option to delete text without adding to clipboard of any kind
+nnoremap C "_d
 vnoremap C "_d
 
 " Normal mode: Run python on current file using F5
