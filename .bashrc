@@ -149,7 +149,9 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/app-chapli
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselect.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselectSearches.service.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/filters/findChoice.filter.coffee")
-#F_ARRAY_END
+f_array+=("/home/christian/bin/erp-service/inventory/filters.py")
+f_array+=("/home/christian/bin/erp-service/inventory/views.py")
+#printNotableEnd
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"
 alias gar-act="source ../bin/activate"

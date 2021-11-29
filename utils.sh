@@ -160,7 +160,7 @@ cecho() {
         colorArg="normal"
     fi
 
-    # Retrieve from associate array
+    # Retrieve from associative array
     colorFromMapping="${colors[$colorArg]}"
     echo -e "${colorFromMapping}${text}"
 }
