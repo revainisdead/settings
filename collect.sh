@@ -12,7 +12,7 @@ updateSettings() {
 #
 # for file in $settings_list
 #     # check for existence of DEST
-#     # if it does not exist, git clone https://github.com/revainisdead/settings.git
+#     # if it does not exist, git clone "git@github-revainisdead:revainisdead/settings.git"
 #     cp file $DEST
 
 echo Copying config files from home directory to settings repository: $(pwd)
