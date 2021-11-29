@@ -63,13 +63,17 @@ alias .....="cd ../../../../../"
 #alias bbb="popd && popd && popd"
 #alias bbbb="popd && popd && popd && popd"
 
+# Screenshots
+alias flame="flameshot gui"
+alias shots="kazam --area"
+
 alias ls="ls --color=auto --group-directories-first"
 alias lsswp="ls .*.swp"
-alias flame="flameshot gui"
 alias installed="sudo apt list --installed"
 alias search="sudo apt-cache search"
 
 alias dp="docker ps"
+alias dc="docker container ls"
 alias di="docker images"
 alias dv="docker volume ls"
 alias dl="docker-compose logs -f --tail 20"
@@ -99,16 +103,29 @@ alias gb="git branch"
 _git_upush() {
     _git_branch
 }
+_git_newpush() {
+    _git_branch
+}
+_git_fpush() {
+    _git_branch
+}
 
-# Directories
+# Moving
 alias bin="cd /home/christian/bin"
+alias down="cd ~/Downloads"
 alias notes="cd /home/christian/bin/notes"
+alias cdf="cd /home/christian/bin/cable_dev_files"
+
 alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
 alias log="cd /home/christian/bin/login-service"
-alias spec="cd /home/christian/bin/summit-knowledge-integration/client/spec"
-#alias spec="cd /home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket"
-#alias spec="cd /home/christian/bin/summit-knowledge-integration/client/spec/core/models"
+
+alias ski2="cd /home/christian/bin/sk2/summit-knowledge-integration2"
+alias erp2="cd /home/christian/bin/sk2/erp-service2"
+alias log2="cd /home/christian/bin/sk2/login-service2"
+
+alias spec="cd /home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket"
+alias specm="cd /home/christian/bin/summit-knowledge-integration/client/spec/core/models"
 alias stash="cd /home/christian/bin/stash"
 
 alias snips="cd /home/christian/Pictures/snippets"
@@ -118,7 +135,6 @@ alias core="cd /home/christian/bin/summit-knowledge-integration/client/src/core"
 alias tick="cd /home/christian/bin/summit-knowledge-integration/server/tickets"
 alias sk="cd /home/christian/bin/summit-knowledge-integration/server/sk"
 #/home/christian/bin/summit-knowledge-integration/server/sk/tasks
-#/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/actions-section.html
 #/home/christian/bin/summit-knowledge-integration/client/src/core/save-button
 
 alias gtp="cd /home/christian/bin/gtpaper-venv/gtpaper"
@@ -149,9 +165,13 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/app-chapli
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselect.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselectSearches.service.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/filters/findChoice.filter.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/ERPEquipment.factory.coffee") # MLE
 f_array+=("/home/christian/bin/erp-service/inventory/filters.py")
 f_array+=("/home/christian/bin/erp-service/inventory/views.py")
-#printNotableEnd
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/inventory/views.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/Store.factory.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/StorageEngine.factory.coffee")
+#f_array_end
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"
 alias gar-act="source ../bin/activate"
@@ -216,13 +236,6 @@ printNotable() {
     do
         echo "$item"
     done
-}
-
-updateSettings() {
-    cp ~/.bashrc ~/bin/settings/
-    cp ~/.vimrc ~/bin/settings/
-    cp ~/.gitconfig ~/bin/settings/
-    cp ~/.ssh/config ~/bin/settings/ssh_config
 }
 
 # Cleanup

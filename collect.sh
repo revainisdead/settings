@@ -15,7 +15,5 @@ updateSettings() {
 #     # if it does not exist, git clone https://github.com/revainisdead/settings.git
 #     cp file $DEST
 
-WORKING_DIR=$(pwd)
-echo Copying config files from home directory to settings repository: $WORKING_DIR
-
-updateSettings()
+echo Copying config files from home directory to settings repository: $(pwd)
+updateSettings

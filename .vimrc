@@ -121,6 +121,7 @@ nmap <F5> :!clear; python3 %<CR>
 " Commands Reference
 " ---
 " New:
+" ---
 " diw -> Delete current word (better than wdb, no space at end)
 " ciw -> Delete current word + Enter insert mode
 " di" -> Delete within quotes ("delete in" quotes)
@@ -128,9 +129,15 @@ nmap <F5> :!clear; python3 %<CR>
 " :.! ls -> Insert output from command directly into vim
 " gv -> Select last used visual selection
 " s -> substitute: delete current character (and go to insert mode)
+"
 " Supertab:
+" --------
 " Ctrl-p -> Go up one item in list (instead of arrow keys)
 " Ctrl-n -> Go down one item in list (instead of array keys)
+"
+" Tags:
+" ----
+" Shift-v + k -> See definition/implementation code of function call
 " ---
 " D: delete from cursor to end of line (not including EOL)
 " u: Undo
@@ -139,7 +146,8 @@ nmap <F5> :!clear; python3 %<CR>
 " A: go into insert mode, at end of the line
 " :set paste  -> turn paste on (better indentation formatting)
 " :set paste! -> turn paste off
-" :%s/word_to_remove/word_to_add/g -> Search and replace
+" :%s/word_to_remove/word_to_add/g -> Search and replace (Global)
+" :s/word_to_remove/word_to_add/g -> Search and replace (Current Line)
 " % -> While on bracket, brings to matching bracket
 " Copy from vim to vim: select text, y (yank), shift-insert
 " Copy from vim to clipboard: select text, shift-y, Ctrl-v
