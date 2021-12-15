@@ -16,19 +16,25 @@
 # Use exclamation at beginning of line if command includes git
 [alias]
     ; Push/Pull
-    ;upush = push origin -u
+    upush = push -u
     newpush = push origin -u
+    mpush = push origin -u master
     fpush = push origin --force-with-lease
     pullrb = pull --rebase
 
     ; Changes
     undo = reset HEAD^
-    all = !git add -u && git add .
     cm = commit -m
     nopre = commit --no-verify -m
     peek = show -p  # peek contents of last commit
     dd = diff develop
     dm = diff master
+
+    ; Staged
+    all = !git add -u && git add .
+
+    ; Unstaged
+    rmunstaged = checkout .
 
     ; List
     rso = remote show origin
@@ -181,14 +187,16 @@
     clean = git-lfs clean %f
     smudge = git-lfs smudge %f
 
-[user]
-    # Please adapt and uncomment the following lines:
+[user] # Please adapt and uncomment the following lines:
 	name = Christian Hall
     email = chall@incytestudios.com
     #signingKey = 
 
     # SSL
 	#sslcalinfo = /etc/ssl/certs/ca-certificates.crt
+
+[init]
+    defaultBranch = master
 
 [core]
     editor = 'vim'

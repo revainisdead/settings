@@ -52,6 +52,17 @@ set undodir=~/.vim/undo
 " Turn off vim error sounds in Windows (no visual bell)
 :set novb
 
+" Functions
+"     Note: Use Ctrl-W + z (aka. <c-w>z)
+fun! CMD(cmd)
+    silent! exe "noautocmd botright pedit ".a:cmd
+    noautocmd wincmd P
+    set buftype=nofile
+    exe "noautocmd r! ".a:cmd
+    noautocmd wincmd p
+endfun
+com! -nargs=1 CMD :call CMD("<args>")
+
 execute pathogen#infect()
 
 " call plug#begin('~/.vim/plugged')
@@ -108,6 +119,11 @@ vnoremap C "_d
 
 " Normal mode: Run python on current file using F5
 nmap <F5> :!clear; python3 %<CR>
+
+" Default leader is \
+" It's an extra modifer, like shift/ctrl/alt.
+map <leader>d :put =strftime('%m/%d/%Y')<CR>
+"map <leader>d :put =strftime('%m/%d/%Y') && :echo ='8 hours work'<CR>
 
 " Description:
 " Instead of using the black hole register, instead remap p to use the

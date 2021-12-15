@@ -71,6 +71,7 @@ alias ls="ls --color=auto --group-directories-first"
 alias lsswp="ls .*.swp"
 alias installed="sudo apt list --installed"
 alias search="sudo apt-cache search"
+alias local-pkg-install="sudo dpkg -i" # <package_name>
 
 alias dp="docker ps"
 alias dc="docker container ls"
@@ -109,13 +110,20 @@ _git_newpush() {
 _git_fpush() {
     _git_branch
 }
+_git_mpush() {
+    _git_branch
+}
+
+# Diagnostics
+alias ubuntu="lsb_release -a"
 
 # Moving
-alias bin="cd /home/christian/bin"
 alias down="cd ~/Downloads"
+
+alias bin="cd /home/christian/bin"
 alias notes="cd /home/christian/bin/notes"
 alias settings="cd /home/christian/bin/settings"
-alias cdf="cd /home/christian/bin/cable_dev_files"
+alias cl="cd /home/christian/bin/captains_log"
 
 alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
@@ -125,7 +133,10 @@ alias ski2="cd /home/christian/bin/sk2/summit-knowledge-integration2"
 alias erp2="cd /home/christian/bin/sk2/erp-service2"
 alias log2="cd /home/christian/bin/sk2/login-service2"
 
+alias cdf="cd /home/christian/bin/cable_dev_files"
+
 alias spec="cd /home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket"
+alias specmod="cd /home/christian/bin/summit-knowledge-integration/client/spec/core/models"
 alias specm="cd /home/christian/bin/summit-knowledge-integration/client/spec/core/models"
 alias stash="cd /home/christian/bin/stash"
 
