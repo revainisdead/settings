@@ -114,6 +114,7 @@ _git_fpush() {
 alias bin="cd /home/christian/bin"
 alias down="cd ~/Downloads"
 alias notes="cd /home/christian/bin/notes"
+alias settings="cd /home/christian/bin/settings"
 alias cdf="cd /home/christian/bin/cable_dev_files"
 
 alias ski="cd /home/christian/bin/summit-knowledge-integration"

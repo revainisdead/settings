@@ -186,8 +186,11 @@ nmap <F5> :!clear; python3 %<CR>
 "   gcgc: Uncomments adjacent commented lines (*)
 "
 " When opening a file that is read only because of permissions, can still save
-" :w !sudo tee %
-
+"   :w !sudo tee %
+"
+" Modify file according to your expandtab setting, very useful for
+" formatting a file from tabs to spaces.
+"   :retab
 
 " Notes
 " ---

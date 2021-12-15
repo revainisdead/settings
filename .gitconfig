@@ -25,15 +25,15 @@
     undo = reset HEAD^
     all = !git add -u && git add .
     cm = commit -m
-    nopre = commit -m --no-verify
+    nopre = commit --no-verify -m
     peek = show -p  # peek contents of last commit
     dd = diff develop
     dm = diff master
 
     ; List
-    rv = remote -v
     rso = remote show origin
     lsf = !git ls-files | grep --color -i
+    v = remote -v
     vv = branch -vv # see upstream branches in third column
 
     ; Branch
