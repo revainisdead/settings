@@ -63,6 +63,29 @@ fun! CMD(cmd)
 endfun
 com! -nargs=1 CMD :call CMD("<args>")
 
+" Make vim search tags recursively up the path
+set tags=./tags;,tags;
+
+" Set max line length for certain types of files using autocmd
+" autocmd BufRead,BufNewFile *.js setlocal textwidth=90
+" autocmd BufRead,BufNewFile *.coffee set tw=90
+autocmd BufRead,BufNewFile *.json setlocal ft=javascript
+autocmd BufRead,BufNewFile *.sh colorscheme pablo
+autocmd BufRead,BufNewFile *.js,*.coffee colorscheme desert
+
+" For vim-commentary
+"autocmd FileType coffee setlocal commentstring=#\ %s
+"autocmd FileType js setlocal commentstring=//\ %s
+"autocmd FileType vimrc setlocal commentstring=\"\ %s
+"autocmd FileType gitconfig setlocal commentstring=#\ %s
+
+"autocmd BufRead,BufNewFile *.yaml tabstop=4
+autocmd BufRead,BufNewFile *.py setlocal indentkeys-=: " remove colon from indent keys
+
+filetype plugin indent on
+syntax enable
+
+" PLUGINS
 execute pathogen#infect()
 
 " call plug#begin('~/.vim/plugged')
@@ -71,6 +94,7 @@ execute pathogen#infect()
 " Plug 'sjl/badwolf'
 " call plug#end()
 
+" BINDINGS
 " set clipboard=unnamed " Use system clipboard as default register
 " Description: P is a synonym for p, overwrite it.
 " Purpose: paste from system clipboard
@@ -207,6 +231,13 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 " Modify file according to your expandtab setting, very useful for
 " formatting a file from tabs to spaces.
 "   :retab
+"
+" Overview of Copy & Paste Mappings
+"   y:          Copy to VIM/RAM clipboard
+"   Ctrl-P:     Paste from VIM/RAM clipboard
+"
+"   Y:          Copy to system clipboard (from VIM)
+"   Shift+Ins:  Paste from system clipboard
 
 " Notes
 " ---
@@ -226,25 +257,3 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 
 " run `sudo apt-get install universal-ctags`
 " run `ctags -R .`
-" Make vim search tags recursively up the path
-set tags=./tags;,tags;
-
-" Set max line length for certain types of files using autocmd
-" autocmd BufRead,BufNewFile *.js setlocal textwidth=90
-" autocmd BufRead,BufNewFile *.coffee set tw=90
-autocmd BufRead,BufNewFile *.json setlocal ft=javascript
-autocmd BufRead,BufNewFile *.sh colorscheme pablo
-autocmd BufRead,BufNewFile *.js,*.coffee colorscheme desert
-
-" For vim-commentary
-"autocmd FileType coffee setlocal commentstring=#\ %s
-"autocmd FileType js setlocal commentstring=//\ %s
-"autocmd FileType vimrc setlocal commentstring=\"\ %s
-"autocmd FileType gitconfig setlocal commentstring=#\ %s
-"
-
-"autocmd BufRead,BufNewFile *.yaml tabstop=4
-autocmd BufRead,BufNewFile *.py setlocal indentkeys-=: " remove colon from indent keys
-
-filetype plugin indent on
-syntax enable
