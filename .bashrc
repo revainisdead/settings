@@ -15,6 +15,20 @@ parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
+# Add command completion for git aliases (defined in .gitconfig)
+_git_upush() {
+    _git_branch
+}
+_git_newpush() {
+    _git_branch
+}
+_git_fpush() {
+    _git_branch
+}
+_git_mpush() {
+    _git_branch
+}
+
 create_PS1() {
     # Add documentation to ps1 terminal line, ie:
     #    [christian@system76-pc (master) ~/bin/summit-knowledge-integration]$
@@ -67,11 +81,16 @@ alias .....="cd ../../../../../"
 alias flame="flameshot gui"
 alias shots="kazam --area"
 
+# Tools
 alias ls="ls --color=auto --group-directories-first"
 alias lsswp="ls .*.swp"
+alias unzipper="tar -zxf"
 alias installed="sudo apt list --installed"
+alias installed_files="dpkg -L" # <package_name>
 alias search="sudo apt-cache search"
 alias local-pkg-install="sudo dpkg -i" # <package_name>
+alias aliasgit="git config --get-regexp alias"
+alias aliasbash="alias"
 
 alias dp="docker ps"
 alias dc="docker container ls"
@@ -100,20 +119,6 @@ alias gdc="git diff --cached"
 alias gl="git log"
 alias gb="git branch"
 
-# Add command completion for git aliases (defined in .gitconfig)
-_git_upush() {
-    _git_branch
-}
-_git_newpush() {
-    _git_branch
-}
-_git_fpush() {
-    _git_branch
-}
-_git_mpush() {
-    _git_branch
-}
-
 # Diagnostics
 alias ubuntu="lsb_release -a"
 
@@ -124,6 +129,7 @@ alias bin="cd /home/christian/bin"
 alias notes="cd /home/christian/bin/notes"
 alias settings="cd /home/christian/bin/settings"
 alias cl="cd /home/christian/bin/captains_log"
+alias crh="cd /home/christian/bin/christian-revain-hall"
 
 alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
@@ -183,6 +189,8 @@ f_array+=("/home/christian/bin/erp-service/inventory/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/inventory/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/Store.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/StorageEngine.factory.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/_SpecRunner.html") # Changing file names, go here too.
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/vendor/jasmine-2.3.4/jasmine.js")
 #f_array_end
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"
@@ -198,7 +206,8 @@ quotesgrep() {
 
 exgrep() {
     echo Checking for $1 excluding node_modules and react-with-addons . . .
-    grep -r --exclude-dir={node_modules,react-with-addons,site-packages,notes,vendor,app-chaplin,.grunt,app-components,.git,static,media} $1 .
+    # Needed to quote the argument $1 below or the escaped values would not work
+    grep -r --exclude="tags" --exclude-dir={node_modules,react-with-addons,site-packages,notes,vendor,app-chaplin,.grunt,app-components,.git,static,media} "$1" .
 }
 
 findname() {

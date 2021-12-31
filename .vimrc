@@ -238,6 +238,9 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 "
 "   Y:          Copy to system clipboard (from VIM)
 "   Shift+Ins:  Paste from system clipboard
+"
+" Set a temporary vertical line to help not exceed maximum characters
+"   :set colorcolumn=78
 
 " Notes
 " ---
