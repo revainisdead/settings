@@ -91,6 +91,9 @@ alias search="sudo apt-cache search"
 alias local-pkg-install="sudo dpkg -i" # <package_name>
 alias aliasgit="git config --get-regexp alias"
 alias aliasbash="alias"
+# Note: The sha for the private and public key will be the same.
+alias ssh_sha="ssh-keygen -lf ~/.ssh/id_rsa.pub"
+alias ssh_md5="ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub"
 
 alias dp="docker ps"
 alias dc="docker container ls"
@@ -121,6 +124,7 @@ alias gb="git branch"
 
 # Diagnostics
 alias ubuntu="lsb_release -a"
+alias openvims="ps -aux | grep vim | sed /grep/d"
 
 # Moving
 alias down="cd ~/Downloads"
