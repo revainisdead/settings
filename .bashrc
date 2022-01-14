@@ -16,9 +16,6 @@ parse_git_branch() {
 }
 
 # Add command completion for git aliases (defined in .gitconfig)
-_git_upush() {
-    _git_branch
-}
 _git_newpush() {
     _git_branch
 }
@@ -95,11 +92,24 @@ alias aliasbash="alias"
 alias ssh_sha="ssh-keygen -lf ~/.ssh/id_rsa.pub"
 alias ssh_md5="ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub"
 
+# Notes
+alias grepper="grep -v -e -r"
+# -e: regex ('e'xpression)
+# -v: non-matching (in'v'erted)
+# -r: search dirs ('r'ecursive)
+#alias grepper_example="GREP_OPTIONS='-v' grep 'one' <<< printf 'line one\nline two\n'"
+alias tz_example="TZ='America/Chicago' date"
+alias tz_env_example="env TZ='America/Chicago' date"
+alias tz_export_example="export TZ='America/Chicago; date"
+# print new lines: use printf 'line one\n line two\n'
+
 alias dp="docker ps"
+alias dcp="docker-compose ps"
 alias dc="docker container ls"
 alias di="docker images"
 alias dv="docker volume ls"
 alias dl="docker-compose logs -f --tail 20"
+alias dn="docker network ls"
 
 dockerIdFromName() {
     # Parse `docker images` output for id of image with name "summit-knowledge-integration_static_build"
@@ -128,6 +138,7 @@ alias openvims="ps -aux | grep vim | sed /grep/d"
 
 # Moving
 alias down="cd ~/Downloads"
+alias priv="cd /home/christian/private"
 
 alias bin="cd /home/christian/bin"
 alias notes="cd /home/christian/bin/notes"
@@ -188,14 +199,25 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uise
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselectSearches.service.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/filters/findChoice.filter.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/ERPEquipment.factory.coffee") # MLE
-f_array+=("/home/christian/bin/erp-service/inventory/filters.py")
-f_array+=("/home/christian/bin/erp-service/inventory/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/inventory/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/Store.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/StorageEngine.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/_SpecRunner.html") # Changing file names, go here too.
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/vendor/jasmine-2.3.4/jasmine.js")
-#f_array_end
+# login service backend docs
+f_array+=("/home/christian/bin/summit-knowledge-integration/src/login-service-backend/login_service_backend.egg-info/PKG-INFO")
+# pdf related
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/mixins.py")       # PDFViewMixin
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/views.py")        # TicketPDFView
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views/misc.py")  # TicketPrintView
+# erp
+f_array+=("/home/christian/bin/erp-service/inventory/filters.py")
+f_array+=("/home/christian/bin/erp-service/inventory/views.py")
+f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/utils.py")
+f_array+=("/home/christian/bin/erp-service/sap/tests/conftest.py")          # @pytest.fixture
+f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/cable_reel_return_fixtures.py")
+f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/cable_reel_return_base_fixtures.py")
+#f array end
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"
 alias gar-act="source ../bin/activate"

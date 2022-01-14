@@ -16,7 +16,6 @@
 # Use exclamation at beginning of line if command includes git
 [alias]
     ; Push/Pull
-    upush = push -u
     newpush = push origin -u
     mpush = push origin -u master
     fpush = push origin --force-with-lease
