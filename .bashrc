@@ -88,6 +88,7 @@ alias search="sudo apt-cache search"
 alias local-pkg-install="sudo dpkg -i" # <package_name>
 alias aliasgit="git config --get-regexp alias"
 alias aliasbash="alias"
+alias envbash="set"
 # Note: The sha for the private and public key will be the same.
 alias ssh_sha="ssh-keygen -lf ~/.ssh/id_rsa.pub"
 alias ssh_md5="ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub"
@@ -192,7 +193,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/rest_se
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/erp.py") # ERPClient
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/grunt-config-new.json")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableModalService.service.coffee")
-f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee") # ???
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/vendor/cancelableResource.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/app-chaplin/routes.js")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselect.directive.coffee")
@@ -204,12 +205,10 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/Stor
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/StorageEngine.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/_SpecRunner.html") # Changing file names, go here too.
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/vendor/jasmine-2.3.4/jasmine.js")
-# login service backend docs
+
+# docs
 f_array+=("/home/christian/bin/summit-knowledge-integration/src/login-service-backend/login_service_backend.egg-info/PKG-INFO")
-# pdf related
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/mixins.py")       # PDFViewMixin
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/views.py")        # TicketPDFView
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views/misc.py")  # TicketPrintView
+
 # erp
 f_array+=("/home/christian/bin/erp-service/inventory/filters.py")
 f_array+=("/home/christian/bin/erp-service/inventory/views.py")
@@ -217,6 +216,29 @@ f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/utils.py")
 f_array+=("/home/christian/bin/erp-service/sap/tests/conftest.py")          # @pytest.fixture
 f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/cable_reel_return_fixtures.py")
 f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/cable_reel_return_base_fixtures.py")
+
+# Three model files to keep open
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/charges.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/base.py")
+
+# PDF/Ticket Printing
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/mixins.py")       # PDFViewMixin
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/views.py")        # TicketPDFView
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views/misc.py")  # TicketPrintView
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/tests/view_tests.py") # TicketPrintViewTests
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templatetags/cable_ticket_tags.py") # Cable Tags
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_ticket.html")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_ticket_section.html")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_segments.html")
+
+# Import Modal
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/material-segment/materialSearchDialog.directive.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket/material-segment/materialSearchDialog.directive.spec.coffee") # Tests
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/material-segment/materialSegmentsModalController.ctrl.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket/material-segment/materialSegmentsModalController.spec.coffee") # Tests
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/PlanningOrderMaterial.factory.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/import-cable/importCableModal.ctrl.coffee")
 #f array end
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"

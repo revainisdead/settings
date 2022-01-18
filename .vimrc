@@ -241,6 +241,10 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 "
 " Set a temporary vertical line to help not exceed maximum characters
 "   :set colorcolumn=78
+"
+" Use regex with search '/', or global ':g'.
+"   /[A-Z][A-Z][A-Z]    # Ex. 3 capital letters in sequence
+"   :g[A-Z][A-Z][A-Z]
 
 " Notes
 " ---
