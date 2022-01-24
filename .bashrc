@@ -181,9 +181,9 @@ alias opgs="cd /home/christian/bin/opg-venv/one-percent-growth/server"
 alias opgc="cd /home/christian/bin/opg-venv/one-percent-growth/client"
 
 
-# Notable files
 # Run `getpathrc` to get the full path of a local file and append it to the file.
 f_array=()
+f_array+=("# Notable files")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/serializers.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py") # CableTicket, CableSegment
@@ -195,7 +195,6 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/rest_se
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/erp.py") # ERPClient
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/grunt-config-new.json")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableModalService.service.coffee")
-f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee") # ???
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/vendor/cancelableResource.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/app-chaplin/routes.js")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselect.directive.coffee")
@@ -234,13 +233,17 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templ
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_ticket_section.html")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_segments.html")
 
-f_array+=("# Import Modal")
+f_array+=("# Add Material")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee") # ???
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/material-segment/materialSearchDialog.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket/material-segment/materialSearchDialog.directive.spec.coffee") # Tests
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/material-segment/materialSegmentsModalController.ctrl.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket/material-segment/materialSegmentsModalController.spec.coffee") # Tests
+
+f_array+=("# Import Modal")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/PlanningOrderMaterial.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/import-cable/importCableModal.ctrl.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableTab.directive.coffee")
 #f array end
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"
