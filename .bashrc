@@ -57,9 +57,10 @@ if [ -x /usr/bin/dircolors ]; then
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+    # Use -n for line numbers (`git grep -n also`)
+    alias grep='grep -n --color=auto'
+    alias fgrep='fgrep -n --color=auto'
+    alias egrep='egrep -n --color=auto'
 fi
 
 # Aliases
@@ -181,6 +182,7 @@ alias opgc="cd /home/christian/bin/opg-venv/one-percent-growth/client"
 
 
 # Notable files
+# Run `getpathrc` to get the full path of a local file and append it to the file.
 f_array=()
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/serializers.py")
@@ -206,10 +208,10 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/Stor
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/_SpecRunner.html") # Changing file names, go here too.
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/vendor/jasmine-2.3.4/jasmine.js")
 
-# docs
+f_array+=("# docs")
 f_array+=("/home/christian/bin/summit-knowledge-integration/src/login-service-backend/login_service_backend.egg-info/PKG-INFO")
 
-# erp
+f_array+=("# erp")
 f_array+=("/home/christian/bin/erp-service/inventory/filters.py")
 f_array+=("/home/christian/bin/erp-service/inventory/views.py")
 f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/utils.py")
@@ -217,13 +219,13 @@ f_array+=("/home/christian/bin/erp-service/sap/tests/conftest.py")          # @p
 f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/cable_reel_return_fixtures.py")
 f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/cable_reel_return_base_fixtures.py")
 
-# Three model files to keep open
+f_array+=("# Three model files to keep open")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/charges.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/base.py")
 
-# PDF/Ticket Printing
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/mixins.py")       # PDFViewMixin
+f_array+=("# PDF/Ticket Printing")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/mixins.py")       # PDFViewMixin (*render_pdf_response*)
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/views.py")        # TicketPDFView
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views/misc.py")  # TicketPrintView
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/tests/view_tests.py") # TicketPrintViewTests
@@ -232,7 +234,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templ
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_ticket_section.html")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_segments.html")
 
-# Import Modal
+f_array+=("# Import Modal")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/material-segment/materialSearchDialog.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket/material-segment/materialSearchDialog.directive.spec.coffee") # Tests
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/material-segment/materialSegmentsModalController.ctrl.coffee")

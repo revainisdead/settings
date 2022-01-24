@@ -95,7 +95,7 @@ execute pathogen#infect()
 " call plug#end()
 
 " BINDINGS
-" set clipboard=unnamed " Use system clipboard as default register
+" set clipboard=unnamed     " Use system clipboard as default register
 " Description: P is a synonym for p, overwrite it.
 " Purpose: paste from system clipboard
 nnoremap P "+p
