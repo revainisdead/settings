@@ -10,7 +10,8 @@
 echo -e "Running javascript tests before commit . . .\n"
 
 # Use -T because it's running inside a script, so don't attach extra terminal
-docker-compose exec -T static_build lerna run test --stream
+#docker-compose exec -T static_build lerna run test --stream
+docker-compose exec -T static_build cd client && grunt test --stream
 
 if [ $? -ne 0 ]; then
     echo "Tests must pass before commit. Please fix and commit again."
