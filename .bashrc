@@ -93,6 +93,7 @@ alias envbash="set"
 # Note: The sha for the private and public key will be the same.
 alias ssh_sha="ssh-keygen -lf ~/.ssh/id_rsa.pub"
 alias ssh_md5="ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub"
+alias openpic="xdg-open"
 
 # Notes
 alias grepper="grep -v -e -r"
@@ -105,9 +106,8 @@ alias tz_env_example="env TZ='America/Chicago' date"
 alias tz_export_example="export TZ='America/Chicago; date"
 # print new lines: use printf 'line one\n line two\n'
 
-alias dp="docker ps"
+alias dp="docker ps" # === alias dc="docker container ls"
 alias dcp="docker-compose ps"
-alias dc="docker container ls"
 alias di="docker images"
 alias dv="docker volume ls"
 alias dl="docker-compose logs -f --tail 20"
@@ -133,14 +133,16 @@ alias gd="git diff"
 alias gdc="git diff --cached"
 alias gl="git log"
 alias gb="git branch"
+alias gg="git grep -n"
 
 # Diagnostics
 alias ubuntu="lsb_release -a"
-alias openvims="ps -aux | grep vim | sed /grep/d"
+alias openVims="ps -aux | grep vim | sed /grep/d"
 
 # Moving
 alias down="cd ~/Downloads"
 alias priv="cd /home/christian/private"
+alias snips="cd /home/christian/Pictures/snippets"
 
 alias bin="cd /home/christian/bin"
 alias notes="cd /home/christian/bin/notes"
@@ -148,6 +150,7 @@ alias settings="cd /home/christian/bin/settings"
 alias cl="cd /home/christian/bin/captains_log"
 alias crh="cd /home/christian/bin/christian-revain-hall"
 
+# Cable Moving
 alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
 alias log="cd /home/christian/bin/login-service"
@@ -163,15 +166,17 @@ alias specmod="cd /home/christian/bin/summit-knowledge-integration/client/spec/c
 alias specm="cd /home/christian/bin/summit-knowledge-integration/client/spec/core/models"
 alias stash="cd /home/christian/bin/stash"
 
-alias snips="cd /home/christian/Pictures/snippets"
 alias cab="cd /home/christian/bin/summit-knowledge-integration/client/src/cable-ticket"
 alias mod="cd /home/christian/bin/summit-knowledge-integration/client/src/core/models"
 alias core="cd /home/christian/bin/summit-knowledge-integration/client/src/core"
 alias tick="cd /home/christian/bin/summit-knowledge-integration/server/tickets"
 alias sk="cd /home/christian/bin/summit-knowledge-integration/server/sk"
+alias printct="cd /home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets"
+
 #/home/christian/bin/summit-knowledge-integration/server/sk/tasks
 #/home/christian/bin/summit-knowledge-integration/client/src/core/save-button
 
+# Greater Than Paper
 alias gtp="cd /home/christian/bin/gtpaper-venv/gtpaper"
 alias gtpact="source /home/christian/bin/gtpaper-venv/bin/activate"
 
@@ -206,6 +211,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/Stor
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/StorageEngine.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/_SpecRunner.html") # Changing file names, go here too.
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/vendor/jasmine-2.3.4/jasmine.js")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/filters.py") # TicketFilter
 
 f_array+=("# docs")
 f_array+=("/home/christian/bin/summit-knowledge-integration/src/login-service-backend/login_service_backend.egg-info/PKG-INFO")
@@ -227,6 +233,7 @@ f_array+=("# PDF/Ticket Printing")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/mixins.py")       # PDFViewMixin (*render_pdf_response*)
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/views.py")        # TicketPDFView
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views/misc.py")  # TicketPrintView
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/pdf_gen.py")     # generate_ticket_pdf (used by PDFViewMixin)
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/tests/view_tests.py") # TicketPrintViewTests
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templatetags/cable_ticket_tags.py") # Cable Tags
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_ticket.html")
@@ -244,6 +251,11 @@ f_array+=("# Import Modal")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/PlanningOrderMaterial.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/import-cable/importCableModal.ctrl.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableTab.directive.coffee")
+
+f_array+=("# Charges total_price")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/Charge.factory.coffee")  # totalPrice
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/charges.py")      # calc_cable_charge_price
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/serializers.py")         # get_charges
 #f array end
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"
