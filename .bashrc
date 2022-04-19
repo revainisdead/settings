@@ -154,6 +154,7 @@ alias crh="cd /home/christian/bin/christian-revain-hall"
 alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
 alias log="cd /home/christian/bin/login-service"
+alias rea="cd /home/christian/bin/reaver"
 
 alias ski2="cd /home/christian/bin/sk2/summit-knowledge-integration2"
 alias erp2="cd /home/christian/bin/sk2/erp-service2"
@@ -235,7 +236,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/model
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/base.py")
 
-f_array+=("# PDF/Ticket Printing")
+f_array+=("# Print Ticket/PDF")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/mixins.py")       # PDFViewMixin (*render_pdf_response*)
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/views.py")        # TicketPDFView
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views/misc.py")  # TicketPrintView
@@ -262,6 +263,16 @@ f_array+=("# Charges total_price")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/Charge.factory.coffee")  # totalPrice
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/charges.py")      # calc_cable_charge_price
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/serializers.py")         # get_charges
+
+f_array+=("# Celery")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/sk/tasks/__init__.py") # celery task created: shared_task()
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views/cable_ticket_mixins/install.py") # views urls
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/sk/tasks/erp_transactions.py")   # celery events: cable
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/sk/tasks/notifications.py")      # celery events: wave1
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/sk/celery.py")                   #
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/celery_local_dev.py")            #
+
+f_array+=("")
 #f array end
 
 alias gar="cd /home/christian/bin/garden-venv/garden/"

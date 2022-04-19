@@ -19,9 +19,9 @@ set backspace=indent,eol,start
 
 set tabstop=4       "Tab indents 4 spaces
 set softtabstop=4   "Important: Also lets you backspace 4 characters
+set shiftwidth=4    "Amount of spaces for > (shift right) or < (shift left)
 set expandtab       "Convert tabs to spaces
 set autoindent      "Auto indent when entering new line, etc.
-set shiftwidth=4    "Amount of spaces for > (shift right) or < (shift left)
 
 set ignorecase  "Works together with smartcase, see next line.
 set smartcase   "If a capital is used, match case, only if ignore case is set first
@@ -81,6 +81,11 @@ autocmd BufRead,BufNewFile *.js,*.coffee colorscheme desert
 
 "autocmd BufRead,BufNewFile *.yaml tabstop=4
 autocmd BufRead,BufNewFile *.py setlocal indentkeys-=: " remove colon from indent keys
+
+" Yaml typically uses 2 spaces for a tab
+autocmd BufRead,BufNewFile *.yml setlocal tabstop=2
+autocmd BufRead,BufNewFile *.yml setlocal softtabstop=2
+autocmd BufRead,BufNewFile *.yml setlocal shiftwidth=2
 
 filetype plugin indent on
 syntax enable
