@@ -201,7 +201,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/erp.py"
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/grunt-config-new.json")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableModalService.service.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/vendor/cancelableResource.factory.coffee")
-f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/app-chaplin/routes.js")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/app-chaplin/routes.js") # Front End Routing
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselect.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselectSearches.service.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/filters/findChoice.filter.coffee")
@@ -213,10 +213,16 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/_SpecRunner.h
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/js/vendor/jasmine-2.3.4/jasmine.js")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/filters.py") # TicketFilter
 
-f_array+=("# docs")
+f_array+=("# SK Overview")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/templates/index_sk.html") # SK Entrypoint: HomeView
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/css/images") # Add images via css
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/sk/views.py") # HomeView
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/locale/en_US/LC_MESSAGES/django.po") # i18next files
+
+f_array+=("# Docs")
 f_array+=("/home/christian/bin/summit-knowledge-integration/src/login-service-backend/login_service_backend.egg-info/PKG-INFO")
 
-f_array+=("# erp")
+f_array+=("# ERP")
 f_array+=("/home/christian/bin/erp-service/inventory/filters.py")
 f_array+=("/home/christian/bin/erp-service/inventory/views.py")
 f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/utils.py")

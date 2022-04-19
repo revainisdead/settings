@@ -25,6 +25,7 @@
     undo = reset HEAD^
     cm = commit -m
     nopre = commit --no-verify -m
+    rebno = commit --amend --no-verify
     peek = show -p  # peek contents of last commit
     dd = diff develop
     dm = diff master
