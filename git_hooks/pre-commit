@@ -6,12 +6,36 @@
 # and will finish the commit once the tests run successfully.
 #
 # (See https://blog.devgenius.io/automate-unit-tests-before-each-commit-by-git-hook-f331f0499786)
+#
+#(old) docker-compose exec -T static_build lerna run test --stream
 
-echo -e "Running javascript tests before commit . . .\n"
 
 # Use -T because it's running inside a script, so don't attach extra terminal
-#docker-compose exec -T static_build lerna run test --stream
-docker-compose exec -T static_build cd client && grunt test --stream
+
+printMsg() {
+    MSG=' before commit...'
+    echo -e "${RUN_MSG}${MSG}\n"
+}
+
+RUN_MSG="Running javascript tests"
+printMsg
+docker-compose exec -T static_build grunt test --stream
+
+RUN_MSG="Running python tests"
+printMsg
+docker-compose exec -T web ./manage.py test --settings=sk.settings.test
+
+RUN_MSG="Running Django System Checks"
+printMsg
+docker-compose exec -T web ./manage.py check --settings=sk.settings.test
+
+RUN_MSG="Running Linting"
+printMsg
+docker-compose exec -T web flake8
+
+RUN_MSG="Running migrations check"
+printMsg
+docker-compose exec -T web ./manage.py makemigrations --check --dry-run
 
 if [ $? -ne 0 ]; then
     echo "Tests must pass before commit. Please fix and commit again."
