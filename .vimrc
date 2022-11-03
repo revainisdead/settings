@@ -64,6 +64,16 @@ fun! CMD(cmd)
 endfun
 com! -nargs=1 CMD :call CMD("<args>")
 
+" Show filename in terminal title instead of directory
+let &titlestring = $USER . "@" . hostname() . " " . expand("%:p")
+if &term == "screen"
+  set t_ts=^[k
+  set t_fs=^[\
+endif
+if &term == "screen" || &term == "xterm" || &term == "xterm-256color"
+  set title
+endif
+
 " Make vim search tags recursively up the path
 set tags=./tags;,tags;
 
@@ -269,8 +279,10 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 "   Ctrl-V
 "   u2713
 "
-" Buffers
-"   #
+" Paste from buffer into search line. Ctrl-R then buffer.
+"   Ctrl-R *    (linux: system clipboard)
+"   Ctrl-R +    (windows: system clipboard)
+"   Ctrl-R "    (last used clipboard)
 
 
 " Notes
