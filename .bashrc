@@ -94,6 +94,7 @@ alias envbash="set"
 alias ssh_sha="ssh-keygen -lf ~/.ssh/id_rsa.pub"
 alias ssh_md5="ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub"
 alias openpic="xdg-open"
+alias corner_drag_settings="ccsm"
 
 # Notes
 alias grepper="grep -v -e -r"
@@ -168,6 +169,7 @@ alias specm="cd /home/christian/bin/summit-knowledge-integration/client/spec/cor
 alias stash="cd /home/christian/bin/stash"
 
 alias cab="cd /home/christian/bin/summit-knowledge-integration/client/src/cable-ticket"
+alias job="cd /home/christian/bin/summit-knowledge-integration/client/src/job"
 alias mod="cd /home/christian/bin/summit-knowledge-integration/client/src/core/models"
 alias core="cd /home/christian/bin/summit-knowledge-integration/client/src/core"
 alias tick="cd /home/christian/bin/summit-knowledge-integration/server/tickets"
@@ -246,6 +248,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templ
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_ticket.html")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_ticket_section.html")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets/cable_segments.html")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/css/print_styles.styl") # Print css
 
 f_array+=("# Add Material")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee") # ???
@@ -272,6 +275,19 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/sk/tasks/noti
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/sk/celery.py")                   #
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/celery_local_dev.py")            #
 
+f_array+=("# Overview")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/invoicing-tab.html")     # Overview
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/ticket-row.html")        # Overview Line Item
+
+f_array+=("Learn")
+f_array+=("/home/christian/bin/erp-service/sap/models.py")
+# ERPRequest(TokenRequest)
+
+f_array+=("ERP Transactions")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/ERPTransaction.factory.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/rest_serializers.py")  # NestedListSerializer
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/request.py")           # RequestCaptureMiddleware
+
 f_array+=("")
 #f array end
 
@@ -293,7 +309,7 @@ exgrep() {
 }
 
 findname() {
-    #echo Searching for file name containg $1 . . .
+    echo Searching for file name containing $1...
 
     # Grep preferrable to -name because it prints matches in color
     # To exlude folders from find use:
@@ -310,7 +326,7 @@ findname() {
 }
 
 finddir() {
-    echo Searching for folder name container $1 . . .
+    echo Searching for folder name containing $1...
     find . -type d -name $1
 }
 

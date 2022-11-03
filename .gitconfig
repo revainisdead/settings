@@ -32,6 +32,7 @@
 
     ; Staged
     all = !git add -u && git add .
+    addchunk = git add -u -p
 
     ; Unstaged
     rmunstaged = checkout .
@@ -56,6 +57,7 @@
 
     ; Change History
     altrebase = !git fetch && git rebase -i origin/develop
+    altrebasemaster = !git fetch && git rebase -i origin/master
     combine = -i --onto # feature1 feature1 feature2
                         # ^ the branch to end up with
                         # ---------^ branch to combine 1
@@ -268,3 +270,5 @@
     #waitingForEditor = false
     #nestedTag = false
     #submoduleAlternateErrorStategyDie = false
+[safe]
+	directory = /home/christian/bin/summit-knowledge-integration/src/login-service-backend

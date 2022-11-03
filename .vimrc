@@ -36,6 +36,7 @@ autocmd FileType gitcommit setl tw=72   "Set max commit line length when rebasin
 nnoremap j gj
 nnoremap k gk
 set iskeyword-=_    "Don't recognize underscore as a word, so w and b break on it
+set iskeyword-=\
 
 " See salt states for automatic undo directory creation
 " https://github.com/revainisdead/saltstates/blob/master/vim/init.sls
@@ -198,8 +199,11 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 " Copy from vim to clipboard: select text, shift-y, Ctrl-v
 " Paste from clipboard to vim: select text, shift-p
 " dd -> Delete current line (surprised how helpful this is)
-" * Ctrl-O: Backwards to last spot looking at (best description...)
-" * Ctrl-I: Fowards: opposite of to last spot
+" Ctrl-O: Backwards to last spot looking at (best description...)
+" Ctrl-I: Fowards: opposite of to last spot
+" . -> The dot means repeat the last set of commands
+" vu -> Visual Select Character, make lowercase
+" vU -> Visual Select Character, make uppercase
 "
 " Macros
 "   q <name>:           start macro and give it a name
@@ -213,6 +217,7 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 "   Ctrl-V:     Enter Visual Block where you'd like comments to start
 "   j:          Go down until you reach where comments should end
 "   Shift-i:    Begin insert mode for the comment characters
+"   [Shift-a]:  Use this instead to add new characters to the right of current
 "   #:          Use # (or //, etc) to add comment to every line denoted by visual block
 "   Escape:     When finished. Type `Escape Escape` to power through delay bug
 "
@@ -238,8 +243,9 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 "   :retab
 "
 " Overview of Copy & Paste Mappings
-"   y:          Copy to VIM/RAM clipboard
-"   Ctrl-P:     Paste from VIM/RAM clipboard
+"   y:              Copy to VIM/RAM clipboard
+"   P:        Paste from System clipboard
+"   Ctrl-P:         Paste from VIM/RAM clipboard
 "
 "   Y:          Copy to system clipboard (from VIM)
 "   Shift+Ins:  Paste from system clipboard
@@ -250,6 +256,22 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 " Use regex with search '/', or global ':g'.
 "   /[A-Z][A-Z][A-Z]    # Ex. 3 capital letters in sequence
 "   :g[A-Z][A-Z][A-Z]
+"
+" Run command with vim
+"   :!{command}         # Opens new window with command results (q to exit)
+"   !!                  # Run without command mode, and insert value of results into vim
+"
+" Show full path of current file
+"   1Ctrl-G             # Use higher number if referring to another buffer
+"
+" Insert Unicode Characters
+"   i
+"   Ctrl-V
+"   u2713
+"
+" Buffers
+"   #
+
 
 " Notes
 " ---
