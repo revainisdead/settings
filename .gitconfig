@@ -29,6 +29,10 @@
     peek = show -p  # peek contents of last commit
     dd = diff develop
     dm = diff master
+    dzero = diff -U0
+
+    ; Log
+    branchlog = cherry -v develop # { mybranch }
 
     ; Staged
     all = !git add -u && git add .
@@ -215,7 +219,7 @@
     #sharedRepository = christian # share repo files among group
 
     autocrlf = false # true means: CRLF in working directory, and LF in repository.
-    safecrlf = true
+    safecrlf = false
     eol = lf
     whitespace = blank-at-eol, blank-at-eof, \
         tab-in-indent, \
@@ -270,5 +274,6 @@
     #waitingForEditor = false
     #nestedTag = false
     #submoduleAlternateErrorStategyDie = false
+    #skippedCherryPicks = false
 [safe]
 	directory = /home/christian/bin/summit-knowledge-integration/src/login-service-backend

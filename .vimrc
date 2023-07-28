@@ -27,6 +27,8 @@ set ignorecase  "Works together with smartcase, see next line.
 set smartcase   "If a capital is used, match case, only if ignore case is set first
 
 set incsearch   "Search while typing
+"set hlsearch   "Turns on search highlighting
+"set nohlsearch "Turns off search highlighting
 
 autocmd FileType gitcommit setl tw=72   "Set max commit line length when rebasing, amend commit, or commit without message
 
@@ -52,6 +54,9 @@ set undodir=~/.vim/undo
 
 " Turn off vim error sounds in Windows (no visual bell)
 :set novb
+" Turn off vim blinking cursor
+:set gcr+=a:blinkon0        " no work
+:set guicursor+=a:blinkon0  " no work
 
 " Functions
 "     Note: Use Ctrl-W + z (aka. <c-w>z)
@@ -94,9 +99,9 @@ autocmd BufRead,BufNewFile *.js,*.coffee colorscheme desert
 autocmd BufRead,BufNewFile *.py setlocal indentkeys-=: " remove colon from indent keys
 
 " Yaml typically uses 2 spaces for a tab
-autocmd BufRead,BufNewFile *.yml setlocal tabstop=2
-autocmd BufRead,BufNewFile *.yml setlocal softtabstop=2
-autocmd BufRead,BufNewFile *.yml setlocal shiftwidth=2
+"autocmd BufRead,BufNewFile *.yml setlocal tabstop=2
+"autocmd BufRead,BufNewFile *.yml setlocal softtabstop=2
+"autocmd BufRead,BufNewFile *.yml setlocal shiftwidth=2
 
 filetype plugin indent on
 syntax enable
@@ -254,7 +259,7 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 "
 " Overview of Copy & Paste Mappings
 "   y:              Copy to VIM/RAM clipboard
-"   P:        Paste from System clipboard
+"   P:              Paste from System clipboard
 "   Ctrl-P:         Paste from VIM/RAM clipboard
 "
 "   Y:          Copy to system clipboard (from VIM)
@@ -280,9 +285,10 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 "   u2713
 "
 " Paste from buffer into search line. Ctrl-R then buffer.
-"   Ctrl-R *    (linux: system clipboard)
-"   Ctrl-R +    (windows: system clipboard)
-"   Ctrl-R "    (last used clipboard)
+"   Ctrl-R 0    (linux: vim register/clipboard)
+"   Ctrl-R *    (linux: system register/clipboard)
+"   Ctrl-R +    (windows: system and vim register/clipboard)
+"   Ctrl-R "    (last used register/clipboard)
 
 
 " Notes

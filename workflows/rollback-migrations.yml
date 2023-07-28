@@ -1,0 +1,39 @@
+name: Rollback Migrations
+
+on:
+  workflow_dispatch:
+    inputs:
+      app:
+        description: "Target Django App"
+        default: "tickets"
+        required: true
+      branch:
+        description: "Branch to deploy"
+        default: "develop"
+        required: false
+
+jobs:
+  rollback-migrations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rollback Info
+        run: |
+          echo "Attempting to rollback migrations"
+          echo "\tbranch: ${{ github.event.inputs.branch }}\n"
+          echo "\tapp: ${{ github.events.inputs.app }}\n"
+
+      - name: Checkout the latest code
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get Rollback Migration
+        id: find_migration
+        run: |
+          migrate_arr=(`python server/manage.py showmigrations $${ github.events.inputs.app }} | grep -Eo "\[X\]([^_])+"`)
+          mig_num_no_zero=`expr ${migrate_arr[-1] - 1`
+          mig_num=(echo 0${mig_num_no_zero})
+          echo "::set-output name=mig_num::${mig_num}:-}"
+      - name: Rollback Migrations
+        run: |
+          python server/manage.py migrate ${{ github.events.inputs.app }} ${{ steps.find_migration.outputs.mig_num }}

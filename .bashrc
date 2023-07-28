@@ -25,6 +25,9 @@ _git_fpush() {
 _git_mpush() {
     _git_branch
 }
+_git_merge() {
+    _git_branch
+}
 
 create_PS1() {
     # Add documentation to ps1 terminal line, ie:
@@ -112,7 +115,9 @@ alias dcp="docker-compose ps"
 alias di="docker images"
 alias dv="docker volume ls"
 alias dl="docker-compose logs -f --tail 20"
+alias dlp="docker-compose -f docker-compose-prod.yml logs -f --tail 20"
 alias dn="docker network ls"
+alias dockerip="docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' summit-knowledge-integration_db_1"
 
 dockerIdFromName() {
     # Parse `docker images` output for id of image with name "summit-knowledge-integration_static_build"
@@ -151,6 +156,9 @@ alias settings="cd /home/christian/bin/settings"
 alias cl="cd /home/christian/bin/captains_log"
 alias crh="cd /home/christian/bin/christian-revain-hall"
 
+# aws
+alias ssh_crh="ssh -i ~/private/first-ec2-salt-master-keys.pem ubuntu@ec2-3-132-194-70.us-east-2.compute.amazonaws.com"
+
 # Cable Moving
 alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
@@ -169,6 +177,9 @@ alias specm="cd /home/christian/bin/summit-knowledge-integration/client/spec/cor
 alias stash="cd /home/christian/bin/stash"
 
 alias cab="cd /home/christian/bin/summit-knowledge-integration/client/src/cable-ticket"
+alias charges="cd /home/christian/bin/summit-knowledge-integration/client/src/charges"
+alias cabb="cd /home/christian/bin/summit-knowledge-integration/client/src/cable-board"
+alias cabocm="cd /home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm"
 alias job="cd /home/christian/bin/summit-knowledge-integration/client/src/job"
 alias mod="cd /home/christian/bin/summit-knowledge-integration/client/src/core/models"
 alias core="cd /home/christian/bin/summit-knowledge-integration/client/src/core"
@@ -236,7 +247,7 @@ f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/cable_reel_return_
 f_array+=("# Three model files to keep open")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/charges.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py")
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/base.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/base.py") # _get_erp_material
 
 f_array+=("# Print Ticket/PDF")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/mailer/mixins.py")       # PDFViewMixin (*render_pdf_response*)
@@ -251,7 +262,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/templ
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/css/print_styles.styl") # Print css
 
 f_array+=("# Add Material")
-f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee") # ???
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/search-dialog/cableMaterialSearchDialog.directive.coffee") # Add Material (from cable ocm)
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/material-segment/materialSearchDialog.directive.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/spec/cable-ticket/material-segment/materialSearchDialog.directive.spec.coffee") # Tests
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/material-segment/materialSegmentsModalController.ctrl.coffee")
@@ -260,7 +271,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/spec/cable-ti
 f_array+=("# Import Modal")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/PlanningOrderMaterial.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/import-cable/importCableModal.ctrl.coffee")
-f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableTab.directive.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm/cableTab.directive.coffee") # Important Import
 
 f_array+=("# Charges total_price")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/Charge.factory.coffee")  # totalPrice
@@ -287,6 +298,22 @@ f_array+=("ERP Transactions")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/ERPTransaction.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/rest_serializers.py")  # NestedListSerializer
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/request.py")           # RequestCaptureMiddleware
+
+f_array+=("Custom Ordering")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/work_order_requests/ordering.py")    # WorkOrderRequestOrdering
+
+f_array+=("Inbound Board")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/inbound-board/list-equipment-tickets.html")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/inbound-board/listEquipmentTicket.ctrl.coffee")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/spec/inbound-board/listEquipmentTicket.spec.coffee")
+
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/events/record.py")           # Job History Tab (Record Events)
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/events/event_types.py")      # Job History Tab (Record Events)
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/Event.factory.coffee")   # Job History Tab
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/eventListTab.directive.coffee")  # Job History Tab
+
+# Server Scripts (Prod)
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/scripts/charge_material_numbers_equipment_type_conversions.py")
 
 f_array+=("")
 #f array end
@@ -354,7 +381,7 @@ printNotable() {
     for item in "${f_array[@]}"
     do
         echo "$item"
-    done
+    done | less
 }
 
 # Cleanup
