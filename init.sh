@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # Move all relevant dot files from this folder to home ~/
-exclude_always=".git .gitignore git_hooks init.sh utils.sh alias.cmd README.md" # alias.cmd is for Windows
-exclude_for_now=".asoundrc .Xdefaults"
-
-exclude="${exclude_always} ${exclude_for_now}"
+include=".bashrc .gitconfig .vimrc"
 
 set -e
 pushd $(dirname $0) > /dev/null
@@ -36,8 +33,8 @@ do
 
     finalpath="${destination}${newName}"
 
-    # Exclude does not contain name
-    if [[ ! $exclude =~ $name ]]; then
+    # Include does contain name
+    if [[ $config_files =~ $name ]]; then
         # Only copy over if file does not already exist
         if [ ! -f $finalpath ]; then
             cecho "Copying file ${name} to ${finalpath}" green
@@ -52,4 +49,5 @@ done
 # Leverage install-hooks.sh to accomplish that
 
 # step 1: move install-hooks.sh into .git/hooks
+# cp $SCRIPT_PATH/git-hooks/install-hooks.sh $PROJECT_DIR/.git/hooks
 # step 2: run install-hooks.sh
