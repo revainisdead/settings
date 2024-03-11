@@ -11,3 +11,9 @@ Host github-revainisdead
     Hostname github.com
     IdentityFile ~/.ssh/revainisdead_id_rsa
     IdentitiesOnly yes
+
+# Gitlab copies: Work account
+Host gitlab.com
+    Hostname gitlab.com
+    IdentityFile ~/.ssh/chall-incyte_id_rsa
+    IdentitiesOnly yes

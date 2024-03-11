@@ -103,6 +103,12 @@ autocmd BufRead,BufNewFile *.py setlocal indentkeys-=: " remove colon from inden
 "autocmd BufRead,BufNewFile *.yml setlocal softtabstop=2
 "autocmd BufRead,BufNewFile *.yml setlocal shiftwidth=2
 
+" Set indent to 2 for all yml
+" But only vue and ts files inside abby project
+autocmd BufRead,BufNewFile *.yml,~/bin/abby/*.vue,~/bin/abby/*.ts setlocal tabstop=2
+autocmd BufRead,BufNewFile *.yml,~/bin/abby/*.vue,~/bin/abby/*.ts setlocal softtabstop=2
+autocmd BufRead,BufNewFile *.yml,~/bin/abby/*.vue,~/bin/abby/*.ts setlocal shiftwidth=2
+
 filetype plugin indent on
 syntax enable
 

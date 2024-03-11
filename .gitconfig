@@ -36,10 +36,11 @@
 
     ; Staged
     all = !git add -u && git add .
-    addchunk = git add -u -p
+    chunk = git add -u -p
 
     ; Unstaged
     rmunstaged = checkout .
+    rmdiffnew = restore .
 
     ; List
     rso = remote show origin

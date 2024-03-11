@@ -81,6 +81,7 @@ alias .....="cd ../../../../../"
 # Screenshots
 alias flame="flameshot gui"
 alias shots="kazam --area"
+alias gif="peek"
 
 # Tools
 alias ls="ls --color=auto --group-directories-first"
@@ -98,6 +99,8 @@ alias ssh_sha="ssh-keygen -lf ~/.ssh/id_rsa.pub"
 alias ssh_md5="ssh-keygen -E md5 -lf ~/.ssh/id_rsa.pub"
 alias openpic="xdg-open"
 alias corner_drag_settings="ccsm"
+alias summitvpn="cd /home/christian/bin/cable_dev_files/chall-incyte_vpn && sudo openvpn --config sk-vpn.ovpn --auth-user-pass credentials"
+alias sha256="sha256sum" # {filename}
 
 # Notes
 alias grepper="grep -v -e -r"
@@ -111,13 +114,14 @@ alias tz_export_example="export TZ='America/Chicago; date"
 # print new lines: use printf 'line one\n line two\n'
 
 alias dp="docker ps" # === alias dc="docker container ls"
-alias dcp="docker-compose ps"
+alias dcp="docker compose ps"
 alias di="docker images"
 alias dv="docker volume ls"
-alias dl="docker-compose logs -f --tail 20"
-alias dlp="docker-compose -f docker-compose-prod.yml logs -f --tail 20"
+alias dl="docker compose logs -f --tail 20"
+alias dlp="docker compose -f docker-compose-prod.yml logs -f --tail 20"
 alias dn="docker network ls"
 alias dockerip="docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' summit-knowledge-integration_db_1"
+alias cleanlog="sudo sh -c 'truncate -s 0 /var/lib/docker/containers/*/*-json.log'"
 
 dockerIdFromName() {
     # Parse `docker images` output for id of image with name "summit-knowledge-integration_static_build"
@@ -143,7 +147,9 @@ alias gg="git grep -n"
 
 # Diagnostics
 alias ubuntu="lsb_release -a"
+alias archs="dpkg --print-architecture"
 alias openVims="ps -aux | grep vim | sed /grep/d"
+alias devices="fwupdmgr get-devices --show-all-devices" # Bonus: `fwupdmgr update`
 
 # Moving
 alias down="cd ~/Downloads"
@@ -164,6 +170,8 @@ alias ski="cd /home/christian/bin/summit-knowledge-integration"
 alias erp="cd /home/christian/bin/erp-service"
 alias log="cd /home/christian/bin/login-service"
 alias rea="cd /home/christian/bin/reaver"
+alias abb="cd /home/christian/bin/abby"
+alias skq="cd /home/christian/bin/quote"
 
 alias ski2="cd /home/christian/bin/sk2/summit-knowledge-integration2"
 alias erp2="cd /home/christian/bin/sk2/erp-service2"
@@ -179,7 +187,7 @@ alias stash="cd /home/christian/bin/stash"
 alias cab="cd /home/christian/bin/summit-knowledge-integration/client/src/cable-ticket"
 alias charges="cd /home/christian/bin/summit-knowledge-integration/client/src/charges"
 alias cabb="cd /home/christian/bin/summit-knowledge-integration/client/src/cable-board"
-alias cabocm="cd /home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm"
+alias cocm="cd /home/christian/bin/summit-knowledge-integration/client/src/job/cable-ocm"
 alias job="cd /home/christian/bin/summit-knowledge-integration/client/src/job"
 alias mod="cd /home/christian/bin/summit-knowledge-integration/client/src/core/models"
 alias core="cd /home/christian/bin/summit-knowledge-integration/client/src/core"
@@ -203,6 +211,7 @@ alias opgc="cd /home/christian/bin/opg-venv/one-percent-growth/client"
 # Run `getpathrc` to get the full path of a local file and append it to the file.
 f_array=()
 f_array+=("# Notable files")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/inventory/views.py") # ERP /v1 passthrough example
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/serializers.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py") # CableTicket, CableSegment
@@ -220,7 +229,6 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uise
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/uiselectSearches.service.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/filters/findChoice.filter.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/ERPEquipment.factory.coffee") # MLE
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/inventory/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/Store.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/StorageEngine.factory.coffee")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/_SpecRunner.html") # Changing file names, go here too.
@@ -312,8 +320,14 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/server/events/event_
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/models/Event.factory.coffee")   # Job History Tab
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/job/eventListTab.directive.coffee")  # Job History Tab
 
-# Server Scripts (Prod)
+f_array+=("Server Scripts (Prod)")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/scripts/charge_material_numbers_equipment_type_conversions.py")
+
+f_array+=("CSS")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/core/main.styl")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/css/summit.styl")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/charges/charges.styl")
+f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/cable-ticket.styl")
 
 f_array+=("")
 #f array end
@@ -323,16 +337,19 @@ alias gar-act="source ../bin/activate"
 
 # Alias functions
 quotesgrep() {
+    # -I: exclude binary file mathcing
     echo Checking for $1 wrapped in single quotes . . .
-    grep -r --exclude-dir={node_modules,react-with-addons} "\'$1\'" .
+    grep -I -r --exclude-dir={node_modules,react-with-addons} "\'$1\'" .
     echo Checking for $1 wrapped in double quotes . . .
-    grep -r --exclude-dir={node_modules,react-with-addons} "\"$1\"" .
+    grep -I -r --exclude-dir={node_modules,react-with-addons} "\"$1\"" .
 }
 
 exgrep() {
     echo Checking for $1 excluding node_modules and react-with-addons . . .
+
     # Needed to quote the argument $1 below or the escaped values would not work
-    grep -r --exclude="tags" --exclude-dir={node_modules,react-with-addons,site-packages,notes,vendor,app-chaplin,.grunt,app-components,.git,static,media} "$1" .
+    # -I: exclude binary file mathcing
+    grep -I -r --exclude="tags" --exclude-dir={node_modules,react-with-addons,site-packages,notes,vendor,app-chaplin,.grunt,app-components,.git,static,media,snap} "$1" .
 }
 
 findname() {
@@ -354,7 +371,11 @@ findname() {
 
 finddir() {
     echo Searching for folder name containing $1...
+    # this does not work for "contain", must be exact match
     find . -type d -name $1
+
+    # might want to do something similar to this but this prints each file path match
+    #find . -type d | grep $1
 }
 
 getpath() {
