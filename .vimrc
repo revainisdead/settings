@@ -109,6 +109,26 @@ autocmd BufRead,BufNewFile *.yml,~/bin/abby/*.vue,~/bin/abby/*.ts setlocal tabst
 autocmd BufRead,BufNewFile *.yml,~/bin/abby/*.vue,~/bin/abby/*.ts setlocal softtabstop=2
 autocmd BufRead,BufNewFile *.yml,~/bin/abby/*.vue,~/bin/abby/*.ts setlocal shiftwidth=2
 
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.vue,~/bin/spyglass/*.ts setlocal tabstop=2
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.vue,~/bin/spyglass/*.ts setlocal softtabstop=2
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.vue,~/bin/spyglass/*.ts setlocal shiftwidth=2
+
+autocmd BufRead,BufNewFile ~/bin/summit-knowledge-integration/*.vue setlocal tabstop=2
+autocmd BufRead,BufNewFile ~/bin/summit-knowledge-integration/*.vue setlocal softtabstop=2
+autocmd BufRead,BufNewFile ~/bin/summit-knowledge-integration/*.vue setlocal shiftwidth=2
+
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.gql,~/bin/spyglass/*.graphql setlocal tabstop=2
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.gql,~/bin/spyglass/*.graphql setlocal softtabstop=2
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.gql,~/bin/spyglass/*.graphql setlocal shiftwidth=2
+
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.sql setlocal tabstop=2
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.sql setlocal softtabstop=2
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.sql setlocal shiftwidth=2
+
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.yml,~/bin/spyglass/*.yaml setlocal tabstop=2
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.yml,~/bin/spyglass/*.yaml setlocal softtabstop=2
+autocmd BufRead,BufNewFile ~/bin/spyglass/*.yml,~/bin/spyglass/*.yaml setlocal shiftwidth=2
+
 filetype plugin indent on
 syntax enable
 
@@ -173,8 +193,35 @@ nmap <F5> :!clear; python3 %<CR>
 
 " Default leader is \
 " It's an extra modifer, like shift/ctrl/alt.
+" cmd: \d
 map <leader>d :put =strftime('%m/%d/%Y')<CR>
 "map <leader>d :put =strftime('%m/%d/%Y') && :echo ='8 hours work'<CR>
+
+
+" Copilot Settings
+" Toggle GitHub Copilot
+let g:copilot_enabled = 0
+
+function! ToggleCopilot()
+  if g:copilot_enabled
+    let g:copilot_enabled = 0
+    Copilot disable
+    echo "GitHub Copilot disabled"
+  else
+    let g:copilot_enabled = 1
+    Copilot enable
+    echo "GitHub Copilot enabled"
+  endif
+endfunction
+
+nnoremap <leader>co :call ToggleCopilot()<CR>
+
+" Disable default tab completion
+"let g:copilot_no_tab_map = v:true
+
+" cmd: Ctrl-J
+"imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+
 
 " Description:
 " Instead of using the black hole register, instead remap p to use the
@@ -227,7 +274,7 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 " vU -> Visual Select Character, make uppercase
 "
 " Macros
-"   q <name>:           start macro and give it a name
+"   q <name>:           start macro and give it a name (ex. q2)
 "   q:                  same key again to stop recording macro
 "   <keys to replay>:   keys you want to to replay in the macro
 "   @<name>:            Play the macro, by name
@@ -295,7 +342,16 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 "   Ctrl-R *    (linux: system register/clipboard)
 "   Ctrl-R +    (windows: system and vim register/clipboard)
 "   Ctrl-R "    (last used register/clipboard)
-
+"
+" Edit file without Vim adding automatic new line at end of file.
+"   :set binary
+"   :set noeol
+"   :w
+"
+" Search and Replace on ONLY highlighted text (visual or visual block)
+"   Shift-V         (highlight, then j or k to go up or down)
+"   :               (type colon aka. Shift-; to open command as :'<,'>
+"   s/null/None    (type /s then replace null with None)
 
 " Notes
 " ---
@@ -315,3 +371,10 @@ map <leader>d :put =strftime('%m/%d/%Y')<CR>
 
 " run `sudo apt-get install universal-ctags`
 " run `ctags -R .`
+"
+" Plugins
+" ---
+" .vim/autoload/pathogen.vim
+" .vim/bundle/vim-coffee-script
+" .vim/bundle/vim-commentary
+" .vim/bundle/vim-stylus

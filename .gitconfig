@@ -17,6 +17,8 @@
 [alias]
     ; Push/Pull
     newpush = push origin -u
+    fnewpush = push --force-with-lease --set-upstream origin
+    hubpush = push github -u
     mpush = push origin -u master
     fpush = push origin --force-with-lease
     pullrb = pull --rebase
@@ -36,11 +38,15 @@
 
     ; Staged
     all = !git add -u && git add .
-    chunk = git add -u -p
+    chunk = add -u -p
 
     ; Unstaged
     rmunstaged = checkout .
     rmdiffnew = restore .
+
+    ; Remove Unstaged - By file
+    ; 1) git reset /file/path
+    ; 2) git checkout /file/path
 
     ; List
     rso = remote show origin
@@ -56,17 +62,38 @@
     odelete = push origin --delete
 
     ; Stash
-    stashun = stash --include-untracked
+    stashboth = stash --include-untracked
+    stashun = stash --keep-index
     speek = stash show -p   # peek contents of latest stash
     schunk = checkout -p stash@{0}
 
     ; Change History
     altrebase = !git fetch && git rebase -i origin/develop
+    p1ere = !git fetch && git rebase -i origin/p1e-develop
+    spyre = !git fetch && git rebase -i origin/development
+    quotereold = !git fetch && git rebase -i github/feature/quote
+    quoterefq = !git fetch && git rebase -i origin/feature/quote
+    quotereqd = !git fetch && git rebase -i origin/quote-develop
+    quotere = !git fetch && git rebase -i origin/quote-development
+    quotedev = !git fetch && git rebase -i origin/development
     altrebasemaster = !git fetch && git rebase -i origin/master
+	nmerge = "!f() { git fetch && git merge origin/\"$1\"; }; f"
+
     combine = -i --onto # feature1 feature1 feature2
                         # ^ the branch to end up with
                         # ---------^ branch to combine 1
                         # ------------------^ branch to combine 2
+
+    ; Lead
+    merge-dry-run = merge --no-commit --no-ff
+
+    ; Multiple Remotes
+    ;
+    ; Ex:
+    ;   git checkout -b foo origin/foo
+    ; Usage:
+    ;   git mcheckout 362-add-new-version github/362-add-new-version
+    mcheckout = checkout -b
 
 # Colors
 # -----------------------------------------------------------------------------------------------------

@@ -1,5 +1,9 @@
 ### My .bashrc ###
 
+# Debug `source .bashrc` aka. print line numbers on error
+#set -x
+#set -eE -i functrace
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -26,6 +30,9 @@ _git_mpush() {
     _git_branch
 }
 _git_merge() {
+    _git_branch
+}
+_git_nmerge() {
     _git_branch
 }
 
@@ -80,12 +87,14 @@ alias .....="cd ../../../../../"
 
 # Screenshots
 alias flame="flameshot gui"
+alias flamed="flameshot gui --delay 3000"
 alias shots="kazam --area"
 alias gif="peek"
 
 # Tools
 alias ls="ls --color=auto --group-directories-first"
 alias lsswp="ls .*.swp"
+alias lsdate="ls -tra" # t: list by date, a: show hidden, r: latest date first (reverse)
 alias unzipper="tar -zxf"
 alias installed="sudo apt list --installed"
 alias installed_files="dpkg -L" # <package_name>
@@ -101,6 +110,8 @@ alias openpic="xdg-open"
 alias corner_drag_settings="ccsm"
 alias summitvpn="cd /home/christian/bin/cable_dev_files/chall-incyte_vpn && sudo openvpn --config sk-vpn.ovpn --auth-user-pass credentials"
 alias sha256="sha256sum" # {filename}
+alias runomega="cd ~/Downloads/Omega_Launcher-Linux && ./'YGO Omega.x86_64' --reset"
+alias gnome="gnome-extensions-app"
 
 # Notes
 alias grepper="grep -v -e -r"
@@ -118,10 +129,16 @@ alias dcp="docker compose ps"
 alias di="docker images"
 alias dv="docker volume ls"
 alias dl="docker compose logs -f --tail 20"
+alias dlapi="docker compose logs -f --since 0m api"     # Quote / SpyGlass / Reaver
 alias dlp="docker compose -f docker-compose-prod.yml logs -f --tail 20"
 alias dn="docker network ls"
 alias dockerip="docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' summit-knowledge-integration_db_1"
 alias cleanlog="sudo sh -c 'truncate -s 0 /var/lib/docker/containers/*/*-json.log'"
+
+# Container Consoles
+alias spybash="docker compose exec -u root api /bin/bash"
+alias spybash2="docker compose exec -u root falcon /bin/bash"
+alias curl_sk_in_docker="curl -H 'Authorization: Token b0fcada58afcdfe8b161d656433e065a8ddfe431' http://sk-web:8000/api/v3/contracts/"
 
 dockerIdFromName() {
     # Parse `docker images` output for id of image with name "summit-knowledge-integration_static_build"
@@ -162,6 +179,19 @@ alias settings="cd /home/christian/bin/settings"
 alias cl="cd /home/christian/bin/captains_log"
 alias crh="cd /home/christian/bin/christian-revain-hall"
 
+# Billing Tab
+alias bt="cd ~/bin/summit-knowledge-integration/apex/" # billing tab
+alias btw="cd ~/bin/summit-knowledge-integration/apex/workspace/" # workspace
+alias btk="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/" # knowledge
+alias btl="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/" # layer
+alias btc="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/" # component
+alias btp="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/pages/job/" # page
+alias btb="vim ~/bin/summit-knowledge-integration/server/utils/billing.py" # get_combined_charges_and_equipment
+
+alias btbuild="cd ~/bin/summit-knowledge-integration && docker compose exec apex pnpm --filter @summit/knowledge generate"
+alias spyrebuild="make stop && make teardown && sleep 5 && make dev && sleep 5 && make restore-spyglass && sleep 30 && make stop && make dev && docker compose logs -f --tail 20"
+alias spy_api_restart="docker compose restart api"
+
 # aws
 alias ssh_crh="ssh -i ~/private/first-ec2-salt-master-keys.pem ubuntu@ec2-3-132-194-70.us-east-2.compute.amazonaws.com"
 
@@ -172,6 +202,23 @@ alias log="cd /home/christian/bin/login-service"
 alias rea="cd /home/christian/bin/reaver"
 alias abb="cd /home/christian/bin/abby"
 alias skq="cd /home/christian/bin/quote"
+alias spy="cd /home/christian/bin/spyglass"
+alias spyut="cd /home/christian/bin/spyglass/frontend/src/tests"
+alias spyct="cd ~/bin/spyglass/frontend/cypress/component"
+alias spytest="cd ~/bin/spyglass/frontend/ && npx cypress open"
+alias spymod="cd /home/christian/bin/spyglass/frontend/src/models/"
+alias spygen="cd /home/christian/bin/spyglass/frontend/src/assets/generated"
+alias spyutil="cd /home/christian/bin/spyglass/frontend/src/utils"
+alias spyc="cd /home/christian/bin/spyglass/frontend/src"
+alias spycv="cd /home/christian/bin/spyglass/frontend/src/views"
+alias spycc="cd /home/christian/bin/spyglass/frontend/src/components/"
+alias spyccq="cd /home/christian/bin/spyglass/frontend/src/components/quotes/"
+alias spys="cd /home/christian/bin/spyglass/"
+alias spymig="cd /home/christian/bin/spyglass/hasura/migrations/default"
+alias spyresetdb="make teardown && sleep 5 && make dev && make restore-spyglass"
+alias spymd="cd /home/christian/bin/spyglass/hasura/metadata"
+alias comp="cd /home/christian/bin/spyglass/frontend/src/components/quotes"
+alias store="cd /home/christian/bin/spyglass/frontend/src/store"
 
 alias ski2="cd /home/christian/bin/sk2/summit-knowledge-integration2"
 alias erp2="cd /home/christian/bin/sk2/erp-service2"
@@ -329,6 +376,16 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/css/summit.st
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/charges/charges.styl")
 f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-ticket/cable-ticket.styl")
 
+# Billing Tab
+f_array+=("Billing Tab")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/jobs/models.py")     # get_salesforce_data, envelope_salesforce_data, callout_job_payload
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/billing.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/abstract.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/pages/job/[id]/billing.vue")
+f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/charge/DataChargeTable.vue")
+f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/charge/DataChargeAssignmentGrid.vue")
+f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/charge/DataChargeAddDialog.vue") # mutateCharge
+
 f_array+=("")
 #f array end
 
@@ -380,7 +437,10 @@ finddir() {
 
 getpath() {
     # Or could use . for directory, equivalent
-    find "$PWD" -name $1
+    #find "$PWD" -name $1
+    
+    # Or
+    readlink -f $1
 }
 getpathrc() {
     echo Printing the absolute path for \"$1\"... \(and adding to .bashrc\)
@@ -410,6 +470,89 @@ removeVimUndo() {
     # Use sed to remove lines containing 'node_modules'
     files=$(find . -type f -print | grep ".un~" | sed "/node_modules/d")
     rm $files
+}
+
+vimswap() {
+    # Get full path of file name
+    #file=$( find "$PWD" -name "$1" )
+
+    file=$1
+    swapfile="${file}.swp"
+    DO_SWAP=0
+
+    echo "File value: $file"
+
+    # Find Vim process using the file and kill it
+    pid=$(pgrep -f "vim $file")
+
+    if [ -n "$pid" ]; then
+        echo "Vim is already open for this file in another tab (PID: $pid)."
+
+        echo "Closing Vim instance..."
+        kill -SIGTERM "$pid"
+
+        echo "Waiting to close..."
+        sleep 1  # Give some time for the process to close
+        echo "Continuing..."
+        sleep 1
+    fi
+
+    # Check if the swap file exists and remove it
+    if [ -f "$swapfile" ]; then
+        echo "Swap file detected: $swapfile"
+        echo "Removing swap file..."
+
+        DO_SWAP=1
+    fi
+
+    if [ $DO_SWAP -eq 1]; then
+        # Idea: instead of removing the swap file,
+        #       create a local copy and move to a
+        #       directory of back up swap files.
+        #       The concern is losing unsaved code.
+        rm "$swapfile"
+    fi
+
+    # or load up from swap file first to guarantee no missing code?
+    # problem: this will remove the new swap file... save fixes
+    #if [ $DO_SWAP -eq 1 ]; then
+    #    vim -r "$file" && rm "$swapfile"
+    #    #rm -i "$swapfile"
+    #else
+    #    vim "$file"
+    #fi
+
+    # Open the file in Vim
+    vim "$file"
+}
+
+set_razer_mouse_speed() {
+  # Ex. set_razer_mouse_speed -0.3
+  local mouse_name="Razer Basilisk Ultimate"
+  local accel_speed="${1:--0.3}"
+
+  # Get the matching xinput line
+  local device_line
+  device_line=$(xinput list | grep "$mouse_name")
+
+  if [[ -z "$device_line" ]]; then
+    echo "❌ Mouse '$mouse_name' not found."
+    return 1
+  fi
+
+  # Extract the id from the line (finding `id=11` pattern)
+  local id
+  id=$(echo "$device_line" | sed -n 's/.*id=\([0-9]\+\).*/\1/p')
+
+  # Apply settings
+  xinput set-prop "$id" "libinput Accel Profile Enabled" 0, 1
+  xinput set-prop "$id" "libinput Accel Speed" "$accel_speed"
+
+  echo "✅ Set '$mouse_name' (ID $id) to flat profile and accel speed $accel_speed"
+}
+
+print_check_emoji() {
+    printf '\xE2\x9C\x85\n'
 }
 
 #alias db="cd /mnt/dev/opt/cyberfire && auto -u postgres psql cyberfire"
@@ -546,3 +689,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
