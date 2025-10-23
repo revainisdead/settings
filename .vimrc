@@ -79,6 +79,22 @@ if &term == "screen" || &term == "xterm" || &term == "xterm-256color"
   set title
 endif
 
+
+""" Yellow Warning status message on opening in Read Only mode
+highlight ReadOnlyBanner ctermbg=yellow ctermfg=black guibg=yellow guifg=black
+
+function! StatusLineReadonly()
+  if &readonly
+    return '%#ReadOnlyBanner# Warning: Read-Only File %#Normal#'
+  else
+    return '%f %m %r %h %w %y %=%l,%c %p%%'
+  endif
+endfunction
+
+set statusline=%!StatusLineReadonly()
+"""
+
+
 " Make vim search tags recursively up the path
 set tags=./tags;,tags;
 
@@ -105,9 +121,9 @@ autocmd BufRead,BufNewFile *.py setlocal indentkeys-=: " remove colon from inden
 
 " Set indent to 2 for all yml
 " But only vue and ts files inside abby project
-autocmd BufRead,BufNewFile *.yml,~/bin/abby/*.vue,~/bin/abby/*.ts setlocal tabstop=2
-autocmd BufRead,BufNewFile *.yml,~/bin/abby/*.vue,~/bin/abby/*.ts setlocal softtabstop=2
-autocmd BufRead,BufNewFile *.yml,~/bin/abby/*.vue,~/bin/abby/*.ts setlocal shiftwidth=2
+autocmd BufRead,BufNewFile *.yml,~/bin/*.vue,~/bin/*.ts setlocal tabstop=2
+autocmd BufRead,BufNewFile *.yml,~/bin/*.vue,~/bin/*.ts setlocal softtabstop=2
+autocmd BufRead,BufNewFile *.yml,~/bin/*.vue,~/bin/*.ts setlocal shiftwidth=2
 
 autocmd BufRead,BufNewFile ~/bin/spyglass/*.vue,~/bin/spyglass/*.ts setlocal tabstop=2
 autocmd BufRead,BufNewFile ~/bin/spyglass/*.vue,~/bin/spyglass/*.ts setlocal softtabstop=2
@@ -140,6 +156,9 @@ execute pathogen#infect()
 " Plug 'rust-lang/rust.vim'
 " Plug 'sjl/badwolf'
 " call plug#end()
+
+" If you use , as a leader, then you won't be able to repeat in the opposite direction a f, F, t, or T motion
+let mapleader = ","
 
 " BINDINGS
 " set clipboard=unnamed     " Use system clipboard as default register
@@ -193,14 +212,14 @@ nmap <F5> :!clear; python3 %<CR>
 
 " Default leader is \
 " It's an extra modifer, like shift/ctrl/alt.
-" cmd: \d
-map <leader>d :put =strftime('%m/%d/%Y')<CR>
+" cmd: ,date
+map <leader>date :put =strftime('%m/%d/%Y')<CR>
 "map <leader>d :put =strftime('%m/%d/%Y') && :echo ='8 hours work'<CR>
 
 
-" Copilot Settings
+""" Copilot Settings
 " Toggle GitHub Copilot
-let g:copilot_enabled = 0
+let g:copilot_enabled = 1
 
 function! ToggleCopilot()
   if g:copilot_enabled
@@ -214,13 +233,30 @@ function! ToggleCopilot()
   endif
 endfunction
 
+" cmd: ,co
 nnoremap <leader>co :call ToggleCopilot()<CR>
 
 " Disable default tab completion
-"let g:copilot_no_tab_map = v:true
+let g:copilot_no_tab_map = v:true
 
-" cmd: Ctrl-J
-"imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+" cmd: Ctrl-L
+imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
+"""
+
+""" Buffer System
+" Map Alt-Shift-[number] to buffers
+for i in range(1, 9)
+  exec 'nnoremap <A-S-' . i . '> :b' . i . '<CR>'
+endfor
+
+" Command: Alt+Shift+0  (go to the last used buffer)
+nnoremap <A-S-0> :b#<CR>
+
+" Command: `:tabnew %%otherfile`  (Open another file in the same directory in new tab)
+"   NOTE: `%` represents the current file so have to use `%%`
+cnoremap %% <C-R>=expand('%:h').'/'<CR>
+"""
+
 
 
 " Description:
@@ -352,6 +388,32 @@ nnoremap <leader>co :call ToggleCopilot()<CR>
 "   Shift-V         (highlight, then j or k to go up or down)
 "   :               (type colon aka. Shift-; to open command as :'<,'>
 "   s/null/None    (type /s then replace null with None)
+"
+" Use string to search copied from outside of vim
+"   :/
+"   Ctrl-R *    (paste from system clipboard)
+"
+" Vim Buffers
+"   :tabnew ~/.vimrc
+"   :ls + /
+"   :b <name>
+"   :b <number>
+"   :bnext
+"   :bprev
+"
+" Highlight and replace!
+"   :'<,'>   # starts with this
+"   :'<,'>s/replace_this/with_this
+"   :'<,'>!sort  →  sort just the highlighted lines
+"   :'<,'>normal @a  →  replay macro a on each line in the selection
+"   :'<,'>write part.txt  →  write selection into a new file
+"
+" Open commands in buffer mode (new tab)
+"   :find filename → search for filename in your path setting
+"   :tabnew filename → open file in a new empty split
+"   :tabedit filename → open file in a new tab
+"   :split filename or :sp filename → horizontal split and open file
+"   :e filename → edit file in current window (buffer)
 
 " Notes
 " ---

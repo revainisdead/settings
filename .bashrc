@@ -20,6 +20,9 @@ parse_git_branch() {
 }
 
 # Add command completion for git aliases (defined in .gitconfig)
+_git_odelete() {
+    _git_branch
+}
 _git_newpush() {
     _git_branch
 }
@@ -56,6 +59,9 @@ create_PS1() {
 #export PS1=$(create_PS1)
 
 export PS1="\[\033[38;5;246m\][\u@\h \[\033[1;33m\]\$(parse_git_branch) \[\033[1;30m\]\[\033[0;32m\]\w\[\033[38;5;246m\]]\[\033[38;5;246m\]$\[\033[00m\] "
+
+# Include local bin in path for vim 9
+export PATH="/usr/local/bin:$PATH"
 
 # Disable Ctrl-s (pause terminal): Inadvertently enable search with Ctrl-s (Ctrl-r: reverse search)
 stty -ixon
@@ -113,6 +119,8 @@ alias sha256="sha256sum" # {filename}
 alias runomega="cd ~/Downloads/Omega_Launcher-Linux && ./'YGO Omega.x86_64' --reset"
 alias gnome="gnome-extensions-app"
 
+alias showdir="tree -aL 1 --dirsfirst --noreport" # Show current directory structure, no report, only one level deep
+
 # Notes
 alias grepper="grep -v -e -r"
 # -e: regex ('e'xpression)
@@ -139,6 +147,26 @@ alias cleanlog="sudo sh -c 'truncate -s 0 /var/lib/docker/containers/*/*-json.lo
 alias spybash="docker compose exec -u root api /bin/bash"
 alias spybash2="docker compose exec -u root falcon /bin/bash"
 alias curl_sk_in_docker="curl -H 'Authorization: Token b0fcada58afcdfe8b161d656433e065a8ddfe431' http://sk-web:8000/api/v3/contracts/"
+
+vimm() {
+  if command vim --serverlist 2>/dev/null | grep -q MAIN; then
+    # Open file with existing server using remote tab if already created
+    command vim --servername MAIN --remote-tab "$@"
+  else
+    # Open file and create server with new server name if it does not exist
+    command vim --servername MAIN "$@"
+  fi
+}
+vimr() {
+  if command vim --serverlist 2>/dev/null | grep -q RIGHT; then
+    # Open file with existing server using remote tab if already created
+    command vim --servername RIGHT --remote-tab "$@"
+  else
+    # Open file and create server with new server name if it does not exist
+    command vim --servername RIGHT "$@"
+  fi
+}
+alias vimservers="command vim --serverlist"
 
 dockerIdFromName() {
     # Parse `docker images` output for id of image with name "summit-knowledge-integration_static_build"
@@ -187,6 +215,8 @@ alias btl="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/" # 
 alias btc="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/" # component
 alias btp="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/pages/job/" # page
 alias btb="vim ~/bin/summit-knowledge-integration/server/utils/billing.py" # get_combined_charges_and_equipment
+alias btplug="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/plugins"
+alias btu="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/utils"
 
 alias btbuild="cd ~/bin/summit-knowledge-integration && docker compose exec apex pnpm --filter @summit/knowledge generate"
 alias spyrebuild="make stop && make teardown && sleep 5 && make dev && sleep 5 && make restore-spyglass && sleep 30 && make stop && make dev && docker compose logs -f --tail 20"
@@ -204,7 +234,7 @@ alias abb="cd /home/christian/bin/abby"
 alias skq="cd /home/christian/bin/quote"
 alias spy="cd /home/christian/bin/spyglass"
 alias spyut="cd /home/christian/bin/spyglass/frontend/src/tests"
-alias spyct="cd ~/bin/spyglass/frontend/cypress/component"
+alias spycy="cd ~/bin/spyglass/frontend/cypress/component"
 alias spytest="cd ~/bin/spyglass/frontend/ && npx cypress open"
 alias spymod="cd /home/christian/bin/spyglass/frontend/src/models/"
 alias spygen="cd /home/christian/bin/spyglass/frontend/src/assets/generated"
@@ -218,7 +248,7 @@ alias spymig="cd /home/christian/bin/spyglass/hasura/migrations/default"
 alias spyresetdb="make teardown && sleep 5 && make dev && make restore-spyglass"
 alias spymd="cd /home/christian/bin/spyglass/hasura/metadata"
 alias comp="cd /home/christian/bin/spyglass/frontend/src/components/quotes"
-alias store="cd /home/christian/bin/spyglass/frontend/src/store"
+alias spystore="cd /home/christian/bin/spyglass/frontend/src/store"
 
 alias ski2="cd /home/christian/bin/sk2/summit-knowledge-integration2"
 alias erp2="cd /home/christian/bin/sk2/erp-service2"
@@ -254,11 +284,13 @@ alias opgact="source /home/christian/bin/opg-venv/bin/activate"
 alias opgs="cd /home/christian/bin/opg-venv/one-percent-growth/server"
 alias opgc="cd /home/christian/bin/opg-venv/one-percent-growth/client"
 
+alias osrs="flatpak run com.jagexlauncher.JagexLauncher"
+
 
 # Run `getpathrc` to get the full path of a local file and append it to the file.
 f_array=()
 f_array+=("# Notable files")
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/inventory/views.py") # ERP /v1 passthrough example
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/inventory/views.py") # ERP /v1 passthrough example (if self.use_s4)
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/views.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/serializers.py")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/cable.py") # CableTicket, CableSegment
@@ -385,6 +417,7 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/apps/
 f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/charge/DataChargeTable.vue")
 f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/charge/DataChargeAssignmentGrid.vue")
 f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/charge/DataChargeAddDialog.vue") # mutateCharge
+f_array+=("/home/christian/bin/erp-service/s4/utils.py")        # UseS4DataForSKAPI
 
 f_array+=("")
 #f array end
@@ -527,28 +560,28 @@ vimswap() {
 }
 
 set_razer_mouse_speed() {
-  # Ex. set_razer_mouse_speed -0.3
-  local mouse_name="Razer Basilisk Ultimate"
-  local accel_speed="${1:--0.3}"
+    # Ex. set_razer_mouse_speed -0.3
+    local mouse_name="Razer Basilisk Ultimate"
+    local accel_speed="${1:--0.3}"
 
-  # Get the matching xinput line
-  local device_line
-  device_line=$(xinput list | grep "$mouse_name")
+    # Get the matching xinput line
+    local device_line
+    device_line=$(xinput list | grep "$mouse_name")
 
-  if [[ -z "$device_line" ]]; then
-    echo "❌ Mouse '$mouse_name' not found."
-    return 1
-  fi
+    if [[ -z "$device_line" ]]; then
+      echo "❌ Mouse '$mouse_name' not found."
+      return 1
+    fi
 
-  # Extract the id from the line (finding `id=11` pattern)
-  local id
-  id=$(echo "$device_line" | sed -n 's/.*id=\([0-9]\+\).*/\1/p')
+    # Extract the id from the line (finding `id=11` pattern)
+    local id
+    id=$(echo "$device_line" | sed -n 's/.*id=\([0-9]\+\).*/\1/p')
 
-  # Apply settings
-  xinput set-prop "$id" "libinput Accel Profile Enabled" 0, 1
-  xinput set-prop "$id" "libinput Accel Speed" "$accel_speed"
+    # Apply settings
+    xinput set-prop "$id" "libinput Accel Profile Enabled" 0, 1
+    xinput set-prop "$id" "libinput Accel Speed" "$accel_speed"
 
-  echo "✅ Set '$mouse_name' (ID $id) to flat profile and accel speed $accel_speed"
+    echo "✅ Set '$mouse_name' (ID $id) to flat profile and accel speed $accel_speed"
 }
 
 print_check_emoji() {

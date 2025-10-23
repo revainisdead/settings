@@ -70,6 +70,7 @@
     ; Change History
     altrebase = !git fetch && git rebase -i origin/develop
     p1ere = !git fetch && git rebase -i origin/p1e-develop
+    skre = !git fetch && git rebase -i origin/master
     spyre = !git fetch && git rebase -i origin/development
     quotereold = !git fetch && git rebase -i github/feature/quote
     quoterefq = !git fetch && git rebase -i origin/feature/quote
