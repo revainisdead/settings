@@ -3,6 +3,8 @@
 # Move all relevant dot files from this folder to home ~/
 include=".bashrc .gitconfig .vimrc"
 
+# TODO include .copilot in above and make it work for directories as well
+
 set -e
 pushd $(dirname $0) > /dev/null
 SCRIPT_PATH=$(pwd -P)
