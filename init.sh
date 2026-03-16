@@ -3,8 +3,6 @@
 # Move all relevant dot files from this folder to home ~/
 include=".bashrc .gitconfig .vimrc"
 
-# TODO include .copilot in above and make it work for directories as well
-
 set -e
 pushd $(dirname $0) > /dev/null
 SCRIPT_PATH=$(pwd -P)
@@ -43,6 +41,28 @@ do
             cp -r $name "$finalpath"
         else
             cecho "File already exists $finalpath" red
+        fi
+    fi
+done
+
+
+include_dirs=".copilot"
+
+# move all directories in include_dirs to it's init location in home directory `~`
+for dir in $include_dirs; do
+    name=`basename $dir`
+    newName=$name
+    destination=~/      # with trailing slash
+
+    finalpath="${destination}${newName}"
+
+    if [ -d $SCRIPT_PATH/$dir ]; then
+        # Only copy over if dir does not already exist
+        if [ ! -d $finalpath ]; then
+            cecho "Copying directory ${name} to ${finalpath}" green
+            cp -r $SCRIPT_PATH/$dir "$finalpath"
+        else
+            cecho "Directory already exists $finalpath" red
         fi
     fi
 done
