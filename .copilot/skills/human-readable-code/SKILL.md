@@ -146,6 +146,26 @@ like especially for missing data, using the guard technique is just fine even gr
         )
 ```
 
+### 12. Dead Code Clarifications
+Usually, you wouldn't want dead code, but truly, a lot of code that remains commented in a code base
+is for context and understanding, OR for future uses that might not be implemented now, but make it
+easier to develop later, and prevents some recalculations if time has already spent on it, and to
+prevent having to redo this work.
+
+- Do not assume commented code is dead code
+- Do not assume protected variables (prefixed with `_` or `__`) are unused (for python nor js)
+
+### 13. Allow for Human nature in comments
+AI has a problem where it thinks if something is witty or sarcastic or in a "joking" attire it thinks
+it should be removed, but in reality, these kind of comments are easier for humans to read and relate
+to, and not only that but they can be more memorable and make the code more enjoyable to read,
+which is a huge part of readability. So, if you see a comment that expresses human nature in the form
+of wit or sarcasm, do not remove it: rather consider that it might add to the readability, enjoyment,
+or memorability of the code.
+
+- Encourage human nature, wit, sarcasm, and maybe a bit of human in comments.
+
+
 ## Review Checklist
 Before finalizing code, check:
 - Are names explicit and meaningful?
@@ -164,7 +184,9 @@ When improving readability:
 - replace nested logic with guard clauses where appropriate
 - separate domain logic from I/O or framework code
 - extract repeated logic into well-named functions
-- remove dead code and noisy comments
+- refactor comments to be more to the point
+- do not assume commented code is dead code
+- preserve human nature in comments when it adds memorability or enjoyment
 - prefer explicit intermediate variables when they improve clarity
 
 ## Output Standard

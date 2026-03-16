@@ -9,7 +9,7 @@ fi
 
 FILE="./$1/SKILL.md"
 
-echo "---" >> "$FILE"
+echo "---" >>"$FILE"
 echo "name:" >> "$FILE"
 echo "description:" >> "$FILE"
 echo "---" >> "$FILE"
