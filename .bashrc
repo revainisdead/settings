@@ -137,6 +137,7 @@ alias dcp="docker compose ps"
 alias di="docker images"
 alias dv="docker volume ls"
 alias dl="docker compose logs -f --tail 20"
+alias ddl="(cd docker && docker compose --env-file .dockerenv logs -f --tail 20)"
 alias dlapi="docker compose logs -f --since 0m api"     # Quote / SpyGlass / Reaver
 alias dlp="docker compose -f docker-compose-prod.yml logs -f --tail 20"
 alias dn="docker network ls"
@@ -147,6 +148,7 @@ alias cleanlog="sudo sh -c 'truncate -s 0 /var/lib/docker/containers/*/*-json.lo
 alias spybash="docker compose exec -u root api /bin/bash"
 alias spybash2="docker compose exec -u root falcon /bin/bash"
 alias curl_sk_in_docker="curl -H 'Authorization: Token b0fcada58afcdfe8b161d656433e065a8ddfe431' http://sk-web:8000/api/v3/contracts/"
+alias btbash="./script-docker/console -t web bash"
 
 vimm() {
   if command vim --serverlist 2>/dev/null | grep -q MAIN; then
@@ -212,14 +214,26 @@ alias bt="cd ~/bin/summit-knowledge-integration/apex/" # billing tab
 alias btw="cd ~/bin/summit-knowledge-integration/apex/workspace/" # workspace
 alias btk="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/" # knowledge
 alias btl="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/" # layer
-alias btc="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/" # component
+alias btc="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/" # components
+alias btc2="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/composables/" # composables
 alias btp="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/pages/job/" # page
 alias btb="vim ~/bin/summit-knowledge-integration/server/utils/billing.py" # get_combined_charges_and_equipment
 alias btplug="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/plugins"
-alias btu="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/utils"
+alias btu_old="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/utils"
+alias btu="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/utils"
+alias btn="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/"
+alias btbillable="vim ~/bin/summit-knowledge-integration/server/tickets/models/billable.py" # Open Billable model
+alias btann="vim ~/bin/summit-knowledge-integration/server/tickets/models/billable.py -o ~/bin/summit-knowledge-integration/server/utils/billing.py" # Open Billing Tab files with annotations
+alias btnuxt="vim ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/nuxt.config.ts"
+alias bt_billing_json="./manage.py runscript scripts.update_billable_json --script-args month=2025-10 plant=2004" # bash
+alias btt="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/i18n/locales/en_US"  # translations
 
+# Build
 alias btbuild="cd ~/bin/summit-knowledge-integration && docker compose exec apex pnpm --filter @summit/knowledge generate"
 alias spyrebuild="make stop && make teardown && sleep 5 && make dev && sleep 5 && make restore-spyglass && sleep 30 && make stop && make dev && docker compose logs -f --tail 20"
+alias hasurabuild="make export && make generate-types"
+alias spybuild1="make export"
+alias spybuild2="make generate-types"
 alias spy_api_restart="docker compose restart api"
 
 # aws
@@ -271,6 +285,9 @@ alias core="cd /home/christian/bin/summit-knowledge-integration/client/src/core"
 alias tick="cd /home/christian/bin/summit-knowledge-integration/server/tickets"
 alias sk="cd /home/christian/bin/summit-knowledge-integration/server/sk"
 alias printct="cd /home/christian/bin/summit-knowledge-integration/server/tickets/templates/print/tickets"
+
+alias aifiles="vim ~/bin/summit-knowledge-integration/.github/copilot-instructions.md -o ~/bin/summit-knowledge-integration/AGENTS.md"
+alias co="cd ~/.copilot"
 
 #/home/christian/bin/summit-knowledge-integration/server/sk/tasks
 #/home/christian/bin/summit-knowledge-integration/client/src/core/save-button
@@ -412,7 +429,8 @@ f_array+=("/home/christian/bin/summit-knowledge-integration/client/src/cable-tic
 f_array+=("Billing Tab")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/jobs/models.py")     # get_salesforce_data, envelope_salesforce_data, callout_job_payload
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/utils/billing.py")
-f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/abstract.py")
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/abstract.py")     # class Billable
+f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/billable.py")     # annotations
 f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/pages/job/[id]/billing.vue")
 f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/charge/DataChargeTable.vue")
 f_array+=("/home/christian/bin/summit-knowledge-integration/apex/workspace/layers/apex/components/data/charge/DataChargeAssignmentGrid.vue")

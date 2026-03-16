@@ -241,7 +241,9 @@ let g:copilot_no_tab_map = v:true
 
 " cmd: Ctrl-L
 imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
-"""
+" cmd: ,ap
+nnoremap <leader>ap o# <Esc>A
+""" Copilot Settings End
 
 """ Buffer System
 " Map Alt-Shift-[number] to buffers
@@ -407,6 +409,11 @@ cnoremap %% <C-R>=expand('%:h').'/'<CR>
 "   :'<,'>!sort  →  sort just the highlighted lines
 "   :'<,'>normal @a  →  replay macro a on each line in the selection
 "   :'<,'>write part.txt  →  write selection into a new file
+"
+" Sort list alphabetically
+"   Highlight lines to sort, then
+"   :'<,'>   # starts with this
+"   :'<,'>%sort
 "
 " Open commands in buffer mode (new tab)
 "   :find filename → search for filename in your path setting
