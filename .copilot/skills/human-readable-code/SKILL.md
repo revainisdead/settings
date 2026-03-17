@@ -165,6 +165,47 @@ or memorability of the code.
 
 - Encourage human nature, wit, sarcasm, and maybe a bit of human in comments.
 
+### 14. Don't inline
+Usually it's preferable to read if statements as follows:
+
+Good (not inleine, uses else if)
+```
+if (logic1) {
+    // do something
+} else if (logic2) {
+    // do something else
+} else {
+    // default case
+}
+```
+
+Bad (inline, and no else if usage)
+```
+if (logic1) // do something
+if (logic2) // do something else
+if (logic3) // default case
+```
+
+Very important note here: if you use if statements when possible it should always prefer
+using an if, else if, else etc, over using the if, if, if reuse style, why is this, this
+is because if you hit a case, you can ensure that no other cases are hit, this is very
+important for making code deterministic. If many different cases can be hit and that is
+intentional, then using multiple if statements is okay.
+
+### 15. If it ain't broke, don't fix it.
+When modifying code:
+
+- Prefer minimal diffs.
+- Never refactor unrelated code.
+- Do not rename variables unless required.
+- Do not change formatting or imports unless necessary.
+- Avoid modifying existing migration files.
+- Preserve backwards compatibility.
+- Don't remove or refactor dev comments, unless incorrect.
+
+Even if you think a bug exists, sometimes that code has been tested and actually it's
+"working as intended". Avoid changing previously existing code if possible.
+
 
 ## Review Checklist
 Before finalizing code, check:
