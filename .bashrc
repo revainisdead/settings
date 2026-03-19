@@ -197,6 +197,7 @@ alias ubuntu="lsb_release -a"
 alias archs="dpkg --print-architecture"
 alias openVims="ps -aux | grep vim | sed /grep/d"
 alias devices="fwupdmgr get-devices --show-all-devices" # Bonus: `fwupdmgr update`
+alias myfs="df -h"
 
 # Moving
 alias down="cd ~/Downloads"
