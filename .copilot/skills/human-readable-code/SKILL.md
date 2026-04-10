@@ -206,6 +206,11 @@ When modifying code:
 Even if you think a bug exists, sometimes that code has been tested and actually it's
 "working as intended". Avoid changing previously existing code if possible.
 
+### 16. Never use python ternary operation
+
+- JS ternary is great and readable
+- Python ternary in general is avoided and considered less readable
+
 
 ## Review Checklist
 Before finalizing code, check:

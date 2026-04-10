@@ -15,9 +15,7 @@ Git has many locations where it can have current code including staged, stashed,
     - Branch commits: `git log HEAD..develop`
     - Branch entire diff: `git diff HEAD..develop`
     - Show commits: `git show {commit_hash}`
-    - Show last stashed: `git show -p`
-2. Only check last stashed if necessary.
-3. Uses the develop-branch skill.
+2. Uses the develop-branch skill.
 
 ## Checklist
 - [ ] Check for unstaged changes using as defined in guidelines.

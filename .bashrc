@@ -225,6 +225,7 @@ alias btu="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/util
 alias btn="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/"
 alias btbillable="vim ~/bin/summit-knowledge-integration/server/tickets/models/billable.py" # Open Billable model
 alias btann="vim ~/bin/summit-knowledge-integration/server/tickets/models/billable.py -o ~/bin/summit-knowledge-integration/server/utils/billing.py" # Open Billing Tab files with annotations
+alias btannswap="vimswap ~/bin/summit-knowledge-integration/server/tickets/models/billable.py && vimswap ~/bin/summit-knowledge-integration/server/utils/billing.py" # Open Billing Tab files with annotations
 alias btnuxt="vim ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/nuxt.config.ts"
 alias bt_billing_json="./manage.py runscript scripts.update_billable_json --script-args month=2025-10 plant=2004" # bash
 alias btt="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/i18n/locales/en_US"  # translations
@@ -348,6 +349,9 @@ f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/utils.py")
 f_array+=("/home/christian/bin/erp-service/sap/tests/conftest.py")          # @pytest.fixture
 f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/cable_reel_return_fixtures.py")
 f_array+=("/home/christian/bin/erp-service/sap/tests/fixtures/cable_reel_return_base_fixtures.py")
+f_array+=("/home/christian/bin/erp-service/sk_pricing/querysets.py") # filter_conditions
+alias open-filter-conditions="vim /home/christian/bin/erp-service/sk_pricing/querysets.py"
+
 
 f_array+=("# Three model files to keep open")
 f_array+=("/home/christian/bin/summit-knowledge-integration/server/tickets/models/charges.py")
