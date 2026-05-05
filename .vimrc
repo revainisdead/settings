@@ -245,6 +245,26 @@ imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
 nnoremap <leader>ap o# <Esc>A
 """ Copilot Settings End
 
+""" Python LSP (Builtin)
+
+"autocmd FileType python call LspStart()
+"if exists(':LspAddServer')
+"  call LspAddServer([#{
+"      name: 'pylsp',
+"      filetype: ['python'],
+"      path: 'pylsp'
+"  }])
+"endif
+
+" completion: Ctrl-Space
+"nnoremap <C-Space> <C-x><C-o>
+
+"let g:python3_host_prog = expand('~/bin/docker-python')
+
+inoremap <silent><expr> <C-n> coc#refresh()
+
+""" Python LSP End
+
 """ Buffer System
 " Map Alt-Shift-[number] to buffers
 for i in range(1, 9)
@@ -447,3 +467,4 @@ cnoremap %% <C-R>=expand('%:h').'/'<CR>
 " .vim/bundle/vim-coffee-script
 " .vim/bundle/vim-commentary
 " .vim/bundle/vim-stylus
+" .vim/bundle/copilot.vim

@@ -225,7 +225,7 @@ alias btu="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/util
 alias btn="cd ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/"
 alias btbillable="vim ~/bin/summit-knowledge-integration/server/tickets/models/billable.py" # Open Billable model
 alias btann="vim ~/bin/summit-knowledge-integration/server/tickets/models/billable.py -o ~/bin/summit-knowledge-integration/server/utils/billing.py" # Open Billing Tab files with annotations
-alias btannswap="vimswap ~/bin/summit-knowledge-integration/server/tickets/models/billable.py && vimswap ~/bin/summit-knowledge-integration/server/utils/billing.py" # Open Billing Tab files with annotations
+alias btannswap="vswap ~/bin/summit-knowledge-integration/server/tickets/models/billable.py && vswap ~/bin/summit-knowledge-integration/server/utils/billing.py" # Open Billing Tab files with annotations
 alias btnuxt="vim ~/bin/summit-knowledge-integration/apex/workspace/layers/apex/nuxt.config.ts"
 alias bt_billing_json="./manage.py runscript scripts.update_billable_json --script-args month=2025-10 plant=2004" # bash
 alias btt="cd ~/bin/summit-knowledge-integration/apex/workspace/apps/knowledge/i18n/locales/en_US"  # translations
@@ -528,18 +528,25 @@ removeVimUndo() {
     rm $files
 }
 
-vimswap() {
+vswap() {
     # Get full path of file name
     #file=$( find "$PWD" -name "$1" )
 
     file=$1
-    swapfile="${file}.swp"
+    swapfile=".${file}.swp"
+
+    swapfile2=".${file}.swo"
+    swapfile3=".${file}.swn"
+    swapfile4=".${file}.swm"
+    swapfile5=".${file}.swl"
+
     DO_SWAP=0
 
     echo "File value: $file"
 
     # Find Vim process using the file and kill it
     pid=$(pgrep -f "vim $file")
+    #pid=$(pgrep -f "vim .*${file}")
 
     if [ -n "$pid" ]; then
         echo "Vim is already open for this file in another tab (PID: $pid)."
@@ -554,32 +561,33 @@ vimswap() {
     fi
 
     # Check if the swap file exists and remove it
-    if [ -f "$swapfile" ]; then
+    if [ -f "$swapfile" ] || \
+       [ -f "$swapfile2" ] || \
+       [ -f "$swapfile3" ] || \
+       [ -f "$swapfile4" ] || \
+       [ -f "$swapfile5" ];
+    then
         echo "Swap file detected: $swapfile"
         echo "Removing swap file..."
 
-        DO_SWAP=1
-    fi
-
-    if [ $DO_SWAP -eq 1]; then
         # Idea: instead of removing the swap file,
         #       create a local copy and move to a
         #       directory of back up swap files.
         #       The concern is losing unsaved code.
         rm "$swapfile"
+
     fi
+
 
     # or load up from swap file first to guarantee no missing code?
     # problem: this will remove the new swap file... save fixes
-    #if [ $DO_SWAP -eq 1 ]; then
-    #    vim -r "$file" && rm "$swapfile"
-    #    #rm -i "$swapfile"
-    #else
-    #    vim "$file"
-    #fi
 
     # Open the file in Vim
     vim "$file"
+}
+
+findswap() {
+    find . -type f -name ".*.sw[a-z]"
 }
 
 set_razer_mouse_speed() {
